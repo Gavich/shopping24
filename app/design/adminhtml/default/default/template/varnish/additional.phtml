@@ -1,0 +1,25 @@
+<br/><br/>
+<div class="content-header">
+	<table cellspacing="0">
+		<tr>
+			<td colspan="2"><h3><?php echo Mage::helper('adminhtml')->__('Varnish Cache Management') ?></h3></td>
+		</tr>
+	</table>
+</div>
+<form action="<?php echo $this->getPurgeUrl()?>">
+	<table class="form-list">
+		<tr>
+			<td class="scope-label">
+				<input type="text" name="purge_url" style="width:500px;"/>
+			</td>
+			<td class="scope-label">
+				<?php echo Mage::helper('adminhtml')->__('URLs to purge, separated by comma')?>
+			</td>
+		</tr>
+		<tr>
+			<td class="scope-label" colspan="2">
+				<button type="submit" class="scalable"><span><?php echo Mage::helper('adminhtml')->__('Purge varnish') ?></span></button>
+			</td>
+		</tr>
+	</table>
+</form>

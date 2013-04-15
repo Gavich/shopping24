@@ -1,0 +1,22 @@
+<script type="text/javascript">
+//<![CDATA[
+
+	Varnish.Init({
+		templateSyntax : /(^|.|\r|\n)({{(\w+)}})/,
+		UPDATE_URL : '<?php echo Mage::getUrl('varnish/update', array('_secure' => Mage::app()->getStore()->isCurrentlySecure())) ?>',
+        TOPCARTCLICK_URL : '<?php echo Mage::getUrl('varnish/update/cart', array('_secure' => Mage::app()->getStore()->isCurrentlySecure())) ?>',
+		REFERER : {
+			URL : '<?php echo Mage::helper('core/url')->getCurrentBase64Url();?>'
+		}
+	});
+
+	jQuery(document).ready(function() {
+		Varnish.addMessagesInit('catalog');
+		Varnish.addMessagesInit('core');
+		Varnish.addMessagesInit('customer');
+		Varnish.addMessagesInit('checkout');
+		Varnish.updateAll();
+	});
+
+	//]]>
+</script>

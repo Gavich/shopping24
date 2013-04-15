@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Rganzhuyev_CatalogDeleter>
+            <version>0.1.0</version>
+        </Rganzhuyev_CatalogDeleter>
+    </modules>
+    <global>
+        <blocks>
+            <catalogDeleter>
+                <class>Rganzhuyev_CatalogDeleter_Block</class>
+            </catalogDeleter>
+        </blocks>
+        <helpers>
+            <catalogDeleter>
+                <class>Rganzhuyev_CatalogDeleter_Helper</class>
+            </catalogDeleter>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Rganzhuyev_CatalogDeleter before="Mage_Adminhtml">Rganzhuyev_CatalogDeleter</Rganzhuyev_CatalogDeleter>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

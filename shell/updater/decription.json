@@ -1,0 +1,24 @@
+{
+    "source" : {
+        "host" : "188.40.70.149",
+        "username" : "gavich",
+        "password" : "1234qwe",
+        "dbname" : "otto",
+        "initStatements" : "SET NAMES utf8",
+        "model" : "mysql4",
+        "type" : "pdo_mysql",
+        "pdoType" : "" ,
+        "active" : "1"
+    },
+    "update":{
+        "entity_type" : "catalog_product",
+        "attribute_name" : "description",
+        "key_attribute_name" : "original_id",
+        "table_name" : "texts",
+        "field_name" : "descr1",
+        "field_type" : "text",
+        "key_field_name" : "id",
+        "update_children" : false,
+        "converter" : null
+    }
+}

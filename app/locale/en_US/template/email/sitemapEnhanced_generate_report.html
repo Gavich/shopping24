@@ -1,0 +1,141 @@
+<!--@subject Sitemap Generation Summary for Domain: {{var sitemap.getDomain()}} @-->
+
+<body style="background: #F6F6F6; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; margin: 0; padding: 0;">
+    <div style="padding: 26px;">
+        Hello,
+        <br /><br />
+        This is a '{{var frequency }}' XML Sitemap Generation Summary for Domain: {{var sitemap.getDomain()}}. 
+        <br /><br />
+        Make sure you re-submit this sitemap Index File to Google & Bing Webmaster Account    
+        to ensure that Search Engines index it. 
+        <br /><br />
+        <b>XML Sitemap Summary: </b>
+        <br />
+        XML Sitemap Index File Location: <a href="{{var sitemap.getLinkForRobots(true)}}" target="_blank">{{var sitemap.getLinkForRobots(true)}}</a>
+        <br />
+        Generated on: {{var sitemap.sitemapTime}}
+        <br />
+        Total Number of Pages:    {{var sitemap.sitemapTotLinks}}
+        <br />
+        Number of Category Pages:   {{var sitemap.sitemapCatLinks}}
+        <br />
+        Number of 'In-Stock' Product Pages:    {{var sitemap.sitemapProdLinks}}
+        <br />
+        Number of 'Out of Stock' Product Pages:    {{var sitemap.sitemapOutLinks}}
+        <br />
+        Number of CMS Pages:    {{var sitemap.sitemapCmsLinks}}
+        <br />
+        Number of Tags Pages:    {{var sitemap.sitemapTagLinks}}
+        <br />
+        Number of Review Pages:   {{var sitemap.sitemapReviewLinks}} 
+        <br />
+        Number of Images:    {{var sitemap.sitemapMediaLinks}}
+        <br />
+        <br />
+        <b>XML Sitemap Generation Summary: </b>
+        {{var sitemap.getGenReport()}}
+        <br />
+        <br />
+        <button type="button" style=" border-width:1px; border-style:solid; border-color:#ed6502 #a04300 #a04300 #ed6502; padding:0 7px 1px 7px; background:#ffac47 url({{var sitemap.getDomain()}}skin/adminhtml/default/default/images/btn_bg.gif) repeat-x 0 100%; cursor:pointer; text-align:center !important; white-space:nowrap; ">
+            <a style="text-decoration:none;" href=" {{var sitemap.getDomain()}}index.php/admin/sitemapEnhanced/ ">
+                <span style="color:#fff; font:bold 12px arial, helvetica, sans-serif; line-height:1.35em; background-repeat:no-repeat; background-position:0 50%;">Go to the Extension</span>
+            </a>
+        </button>
+        <br /><br />
+        <b>Magento XML Sitemap Generator & Splitter</b> is a Magento Extension developed by CueBlocks.com in compliance with <a href="http://support.google.com/webmasters/bin/answer.py?hl=en&answer=156184&from=40318&rd=1">Google Sitemap Guidelines</a>. If you have any feedback or queries regarding functioning of this extension, you can email at <a href="mailto:magento@cueblocks.com">magento@cueblocks.com</a>.    
+        <br /><br /> 
+        Please note that this extension is provided as is. It is recommended to always backup your installation prior to use.  
+        <br /><br /> 
+        This message was sent to: {{var recipiants}}.  
+        <br /><br /> 
+        Visit the <a href="{{var sitemap.getDomain()}}index.php/admin/system_config/edit/section/sitemapEnhanced/">Configuration</a> Settings of your Magento store, to manage your email alerts for this extension. Please add {{var sender}} to your address book to ensure delivery of our emails to your in-box.    
+        <br /><br />
+        Thank you for using <a href="www.cueblocks.com">CueBlocks </a>'Magento XML Sitemap Generator & Splitter'. 
+
+
+        <!--        <table cellspacing="0" cellpadding="0" border="1" width="100%">
+                    <colgroup><col width="184"> <col width="428"> </colgroup><tbody>
+                        <tr>
+                            <td colspan="2" style="border:1px solid rgb(0,0,0);padding:0.1cm" valign="TOP" width="620">
+                                <p style="background:none repeat scroll 0% 0% rgb(230,230,230)"><b>Sitemap.xml
+                                        Summary for Domain: <a href="{{var sitemap.getDomain()}}">{{var sitemap.getDomain()}}</a></b> </p>
+                            </td>
+                        </tr>
+                        <tr valign="TOP">
+                            <td  width="184">
+                                <p>Sitemap Index File
+                                    Location</p>
+                            </td>
+                            <td  width="428">
+                                <p></a></p>
+                            </td>
+                        </tr>
+                        <tr valign="TOP">
+                            <td  width="184">
+                                <p>Generated on</p>
+                            </td>
+                            <td  width="428">
+                                <p>{{var sitemap.sitemapTime}}<br>
+                                </p>
+                            </td>
+                        </tr>             
+                        <tr valign="TOP">
+                            <td  width="184">
+                                <p>Number of Category Pages</p>
+                            </td>
+                            <td  width="428">
+                                <p>{{var sitemap.sitemapCatLinks}}</p>
+                            </td>
+                        </tr>
+                        <tr valign="TOP">
+                            <td  width="184">
+                                <p>Number of Product Pages</p>
+                            </td>
+                            <td  width="428">
+                                <p>{{var sitemap.sitemapProdLinks}}</p>
+                            </td>
+                        </tr>
+                        <tr valign="TOP">
+                            <td  width="184">
+                                <p>Number of Out of Stock Pages </p>
+                            </td>
+                            <td  width="428">
+                                <p>{{var sitemap.sitemapOutLinks}}</p>
+                            </td>
+                        </tr>
+                        <tr valign="TOP">
+                            <td  width="184">
+                                <p>Number of CMS Pages </p>
+                            </td>
+                            <td  width="428">
+                                <p>{{var sitemap.sitemapCmsLinks}}</p>
+                            </td>
+                        </tr>
+                        <tr valign="TOP">
+                            <td  width="184">
+                                <p>Number of Tag Pages</p>
+                            </td>
+                            <td  width="428">
+                                <p>{{var sitemap.sitemapTagLinks}}</p>
+                            </td>
+                        </tr>
+                        <tr valign="TOP">
+                            <td  width="184">
+                                <p>Number of Review Pages </p>
+                            </td>
+                            <td  width="428">
+                                <p>{{var sitemap.sitemapReviewLinks}}</p>
+                            </td>
+                        </tr>
+                        <tr valign="TOP">
+                            <td  width="184">
+                                <p><b>Total Number of Pages</b></p>
+                            </td>
+                            <td width="428">
+                                <p><b>{{var sitemap.sitemapTotLinks}}</b></p>
+                            </td>
+                        </tr> 
+                    </tbody>
+                </table>-->
+    </div>
+</body>

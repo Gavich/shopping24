@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TC_Setup>
+            <active>true</active>
+            <codePool>local</codePool>
+        </TC_Setup>
+        <TC_Import>
+            <active>true</active>
+            <codePool>local</codePool>
+        </TC_Import>
+        <TC_Catalog>
+            <active>true</active>
+            <codePool>local</codePool>
+        </TC_Catalog>
+        <TC_Varnish>
+            <active>true</active>
+            <codePool>local</codePool>
+        </TC_Varnish>
+        <TC_Perfomance>
+            <active>true</active>
+            <codePool>local</codePool>
+        </TC_Perfomance>
+    </modules>
+</config>

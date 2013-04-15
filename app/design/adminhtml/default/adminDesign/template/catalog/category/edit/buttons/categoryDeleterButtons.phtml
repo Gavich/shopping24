@@ -1,0 +1,18 @@
+<?php
+$categoryId = $this->getCategoryId();
+$formKey = Mage::getSingleton('core/session')->getFormKey();
+$deleteCategoryTreeUrl = Mage::getUrl('').'admin/remove/deleteCategoryTree/key/'.$formKey.'/id/'.$categoryId.'/?isAjax=true';
+$deleteProductTreeUrl = Mage::getUrl('').'admin/remove/deleteProductTree/key/'.$formKey.'/id/'.$categoryId.'/?isAjax=true';
+?>
+<button id="delete_category_tree_<?php echo md5($categoryId); ?>"
+        title="Удалить подкатегории"
+        type="button" class="scalable delete"
+        onclick="deleteCategoryTree('<?php echo $deleteCategoryTreeUrl; ?>', true, <?php echo $categoryId; ?>)" style="">
+    <span><span><span>Удалить подкатегории</span></span></span>
+</button>
+<button id="delete_products_<?php echo md5($categoryId); ?>"
+        title="Удалить продукты"
+        type="button" class="scalable delete"
+        onclick="deleteProductTree('<?php echo $deleteProductTreeUrl; ?>', true, <?php echo $categoryId; ?>)" style="">
+    <span><span><span>Удалить продукты</span></span></span>
+</button>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+	<sections>
+		<tc_varnish translate="label" module="tc_varnish">
+			<show_in_default>1</show_in_default>
+			<show_in_website>0</show_in_website>
+			<show_in_store>0</show_in_store>
+			<label>Varnish Cache</label>
+			<tab>advanced</tab>
+			<groups>
+				<general translate="label" module="tc_varnish">
+				<show_in_default>1</show_in_default>
+				<show_in_website>0</show_in_website>
+				<show_in_store>0</show_in_store>
+				<label>General</label>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</active>
+						<servers translate="label">
+							<label>Servers</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>Format: "host1:port1[:secret1];host2:port2[:secret2];..."</comment>
+						</servers>
+						<version>
+							<label>Varnish version</label>
+							<source_model>tc_varnish/source_varnishversion</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>11</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</version>
+					</fields>
+				</general>
+			</groups>
+		</tc_varnish>
+	</sections>
+</config>

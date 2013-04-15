@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<TC_Setup>
+			<version>0.0.6</version>
+		</TC_Setup>
+	</modules>
+	<global>
+		<resources>
+			<tcsetup_setup>
+				<setup>
+					<module>TC_Setup</module>
+					<class>Mage_Eav_Model_Entity_Setup</class>
+				</setup>
+				<connection>
+					<use>default_setup</use>
+				</connection>
+			</tcsetup_setup>
+		</resources>
+		<models>
+			<core>
+				<rewrite>
+					<locale>TC_Setup_Model_Locale</locale>
+				</rewrite>
+			</core>
+		</models>
+	</global>
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <CueBlocks_SitemapEnhanced>
+            <active>true</active>
+            <codePool>community</codePool>
+        </CueBlocks_SitemapEnhanced>
+    </modules>
+</config>

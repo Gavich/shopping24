@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<action method="addJs">
+				<script>TC/varnish.js</script>
+			</action>
+		</reference>
+		<reference name="after_body_start">
+			<block type="core/template" name="varnish_init" template="varnish/init.phtml" />
+		</reference>
+	</default>
+</layout>

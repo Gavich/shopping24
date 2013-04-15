@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Rganzhuyev_AdminDesign>
+            <version>0.1.0</version>
+        </Rganzhuyev_AdminDesign>
+    </modules>
+    <global>
+    </global>
+    <adminhtml>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <on_product_controller_load>
+                        <type>singleton</type>
+                        <class>Rganzhuyev_AdminDesign_Model_Observer</class>
+                        <method>onControllerLoad</method>
+                    </on_product_controller_load>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+    </adminhtml>
+</config>

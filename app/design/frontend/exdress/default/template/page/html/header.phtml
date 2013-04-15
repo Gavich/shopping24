@@ -1,0 +1,57 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<div class="header-container">
+    <div class="header-content">
+        <div class="nav-container">
+            <?php if ($this->getIsHomePage()):?>
+            <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+            <?php else:?>
+            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <?php endif?>
+            <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_info_block')->toHtml() ?>
+
+            <div class="header">
+                <div class="quick-access">
+                    <?php echo $this->getChildHtml('store_language') ?>
+                    <?php echo $this->getChildHtml('topSearch') ?>
+                    <div class="subheader">
+                        <?php //echo $this->getChildHtml('cms_subheader') ?>
+                    </div>
+                    <div class="quick-access-link">
+                        <?php echo $this->getChildHtml('topLinks') ?>
+                    </div>
+                    <?php echo $this->getChildHtml('cart_sidebar')?>
+                </div>
+                <?php echo $this->getChildHtml('topContainer'); ?>
+            </div>
+
+            <div class="menu-box">
+                <?php echo $this->getChildHtml('cms_mainmenu', true) ?>
+                <script type="text/javascript">
+                    jQuery(document).ready(function(){
+                        jQuery('div.header-container div.menu-box ul.menu li.position-right-li').hover(
+                            function(e){
+                                if (jQuery(this).position().top == 0){
+                                    jQuery(this).find('div:first').before('<div class="spacer">&nbsp;</div>');
+                                }
+                            },
+                            function(){
+                                jQuery(this).find('div.spacer').remove();
+                            }
+                        );
+                    })
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<?php echo $this->getChildHtml('topMenu') ?>
+<?php echo $this->getChildHtml('delivery_promoter') ?>

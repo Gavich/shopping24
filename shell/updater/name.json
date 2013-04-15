@@ -1,0 +1,24 @@
+{
+    "source" : {
+        "host" : "localhost",
+        "username" : "root",
+        "password" : "",
+        "dbname" : "source",
+        "initStatements" : "SET NAMES utf8",
+        "model" : "mysql4",
+        "type" : "pdo_mysql",
+        "pdoType" : "" ,
+        "active" : "1"
+    },
+    "update":{
+        "entity_type" : "catalog_product",
+        "attribute_name" : "name",
+        "key_attribute_name" : "original_id",
+        "table_name" : "art_init",
+        "field_name" : "name",
+        "field_type" : "varchar",
+        "key_field_name" : "id",
+        "update_children" : true,
+        "converter" : null
+    }
+}
