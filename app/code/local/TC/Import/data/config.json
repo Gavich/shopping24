@@ -47,7 +47,6 @@
 			"is_in_stock " : {"default" : "1"},
 			"manage_stock " : {"default" : "0"},
 			"websites " : {"default" : "base"},
-			"configurable_attributes" : {},
 			"is_photo_processed" : {},
 			"association_id" : {},
 			"url_key" : {}
