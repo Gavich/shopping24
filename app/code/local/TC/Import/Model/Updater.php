@@ -75,14 +75,22 @@ class TC_Import_Model_Updater{
 					}
 					$variation['price'] = number_format((float)$variation['price'] * $multiplier, 2);
 					$result[$my_sku_internal]['price'] = $variation['price'];
-					$result[$my_sku_internal]['availabilityCode'] = $variation['availabilityCode'];
-					Mage::log($my_sku_internal."   ".$result[$my_sku_internal]['availabilityCode'], 1, 'gavich.log');	
 					if (isset($variation['availabilityText'])){
 						$result[$my_sku_internal]['availabilityText'] = $variation['availabilityText'];
+						$result[$my_sku_internal]['availability'] = $variation['availabilityText'] == 'lieferbar' ? true : false;
+						}
+					if (isset($variation['PPFAvailabilityText'])){
+						$result[$my_sku_internal]['availabilityCode'] = $variation['PPFAvailabilityText'];
+						$result[$my_sku_internal]['availability'] = $variation['PPFAvailabilityText'] == 'lieferbar' ? true : false;
+						}						
+					if (isset($variation['availabilityCode'])){
+						$result[$my_sku_internal]['availabilityCode'] = $variation['availabilityCode'];
+						$result[$my_sku_internal]['availability'] = $variation['availabilityCode'] == 'lieferbar' ? true : false;
+						}
 						
-					}
-
-					$result[$my_sku_internal]['availability'] = $variation['availabilityCode'] == 'lieferbar' ? true : false;
+                    if (isset($result[$my_sku_internal]['availability'])){
+						Mage::log($my_sku_internal."   ".$result[$my_sku_internal]['availability'], 1, 'gavich.log');	
+						}
 				}
 			}
 		}
