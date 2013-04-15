@@ -82,7 +82,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </path_map>-->
-                        <linkslimit translate="label">
+<!--                         <linkslimit translate="label">
                             <label>Max number of links for file</label>
                             <frontend_type>text</frontend_type>
                             <comment></comment>
@@ -99,7 +99,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </byteslimit>
+                        </byteslimit>-->
 <!--                           <udpaterobots translate="label">
                             <label>Update Robots.txt</label>
                             <frontend_type>select</frontend_type>

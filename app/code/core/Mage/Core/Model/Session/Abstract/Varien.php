@@ -111,7 +111,7 @@ class Mage_Core_Model_Session_Abstract_Varien extends Varien_Object
             $this->setSessionName($sessionName);
         }
 
-       potential custom logic for session id (ex. switching between hosts)
+        // potential custom logic for session id (ex. switching between hosts)
         $this->setSessionId();
 
         Varien_Profiler::start(__METHOD__.'/start');
