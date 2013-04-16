@@ -97,14 +97,20 @@ class CueBlocks_SitemapEnhanced_Model_SitemapEnhancedIoFile extends Varien_Io_Fi
 
         $this->streamWrite('<?xml version="1.0" encoding="UTF-8"?>' . "\n");
 
+<<<<<<< .mine
+        if (($this->_type == 'sitemap')OR($this->_type == 'index')) 
+            $this->streamWrite('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+           //  $this->streamWrite('<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">');
+=======
         if ($this->_type == 'sitemap')
             $this->streamWrite('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+>>>>>>> .r68
         elseif ($this->_type == 'image')
             $this->streamWrite('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
                 xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">');
-        else
-            $this->streamWrite('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
-
+        else//if($this->_type=='index')
+            //$this->streamWrite('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+              $this->streamWrite('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
         return true;
     }
 
@@ -147,10 +153,11 @@ class CueBlocks_SitemapEnhanced_Model_SitemapEnhancedIoFile extends Varien_Io_Fi
             $this->streamUnlock();
         }
 
-        if ($this->_type == 'sitemap' || $this->_type == 'image' )
+        if ($this->_type == 'sitemap' || $this->_type == 'image' ||$this->_type == 'index')
             $this->streamWrite('</urlset>');
         else
-            $this->streamWrite('</sitemapindex>');
+          //  $this->streamWrite('</sitemapindex>');
+             $this->streamWrite('</urlset>');
 
         call_user_func(@$this->_closeFunction, $this->_streamHandler);
 
@@ -162,4 +169,3 @@ class CueBlocks_SitemapEnhanced_Model_SitemapEnhancedIoFile extends Varien_Io_Fi
 
 }
 
-?>
