@@ -343,8 +343,9 @@ class CueBlocks_SitemapEnhanced_Model_SitemapEnhanced extends Mage_Sitemap_Model
                 $newFileName = $fileModelFilename . '_' . ($count);
                 if ($useSepCounter)
                     $this->_sepFileCounter += 1;
-
+                  $newFileName=$newFileName.'.xml';
                 $this->_addFile($fileModel->getType(), $newFileName);
+              
                 $fileModel = $this->_ioCollection->getLastItem();
             }
             $this->setSitemapTotLinks($this->getSitemapTotLinks() + 1);
@@ -352,6 +353,7 @@ class CueBlocks_SitemapEnhanced_Model_SitemapEnhanced extends Mage_Sitemap_Model
 
         $fileModel->getIo()->streamWrite($xml);
         $fileModel->getIo()->increaseLinks(1);
+        
     }
 
     protected function _initVar($forceConfReload = false) {
@@ -455,6 +457,7 @@ class CueBlocks_SitemapEnhanced_Model_SitemapEnhanced extends Mage_Sitemap_Model
             $queryCollection = Mage::getResourceModel('sitemapEnhanced/catalog_category')->getCollection($this->getStoreId());
 
             if ($queryCollection->rowCount() > 0) {
+                
 
                 $this->_addFileHelper(self::CATEGORY_FILENAME, TRUE);
 
@@ -876,7 +879,7 @@ class CueBlocks_SitemapEnhanced_Model_SitemapEnhanced extends Mage_Sitemap_Model
                 $url = Mage::app()->getStore($this->getStoreId())->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) . $fileName;
                 $url = $this->getHelper()->escapeHtml($url);
 
-                $xml = sprintf('<sitemap><loc>%s</loc><lastmod>%s</lastmod></sitemap>', $url, $this->_date);
+                $xml = sprintf('<url><loc>%s</loc><lastmod>%s</lastmod></url>', $url, $this->_date);
                 $this->_addLink($xml, 'index');
             }
         }
