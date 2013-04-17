@@ -10,7 +10,7 @@ class CDD_CustomWidget_Block_Menu extends Mage_Cms_Block_Block{
 
 	protected function _construct(){
 		$this->addData(array(
-			'cache_lifetime' => 1000,
+			'cache_lifetime' => 86000,
 			'cache_tags' => array(self::CACHE_TAG),
 		));
 	}

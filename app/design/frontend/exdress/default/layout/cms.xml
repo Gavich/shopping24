@@ -33,9 +33,6 @@ Default layout, loads most of the pages
 
     <default>
 		<reference name="header">
-			<block type="customwidget/menu" name="cms_mainmenu">                
-                <action method="setBlockId"><block_id>mainmenu</block_id></action>
-            </block>
             <block type="cms/block" name="cms_subheader" after="top.search">
 				<action method="setBlockId"><block_id>subheader</block_id></action>
 			</block>

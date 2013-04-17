@@ -9,10 +9,19 @@
  * @version    1.1
  */
 /**************** Flyout Menu Bar */
+
 .menu-box{
     float:left;
     padding: 15px 0 10px;
     position:relative !important;
+    background: #fff;
+    width: 100%;
+}
+#cms_mainmenu{
+    text-align: center;
+}
+#cms_mainmenu .menu-loader{
+    padding: 17px 0;
 }
 .menu{
     font-size:12px;

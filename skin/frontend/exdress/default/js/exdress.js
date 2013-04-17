@@ -237,7 +237,7 @@
 
         }
 
-    function menu() {
+    window.menuBuild = function() {
         var Width_ul = 0;
         var Width_li = 0;
         var Width_before = 0;
@@ -667,7 +667,7 @@
     }
 
     document.observe("dom:loaded", function() {
-        menu();
+        //menu();
         //loadmenu();
         decorateBrandsslider();
         showshopping();

@@ -30,9 +30,13 @@
             </div>
 
             <div class="menu-box">
-                <?php echo $this->getChildHtml('cms_mainmenu', true) ?>
+                <div class="varnish-reload" id="cms_mainmenu" rel="cms_mainmenu">
+                    <img src="<?php echo Mage::getDesign()->getSkinUrl('images/ajax-loader.gif'); ?>" class="menu-loader">
+                </div>
                 <script type="text/javascript">
-                    jQuery(document).ready(function(){
+                    Varnish.addCallBack('cms_mainmenu', function(){
+                        menuBuild();
+
                         jQuery('div.header-container div.menu-box ul.menu > li').hover(
                             function(e) {
                                 jQuery(this).find('.spacer').show();

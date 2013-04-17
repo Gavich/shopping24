@@ -75,4 +75,15 @@ class TC_Varnish_Helper_Html extends Mage_Core_Helper_Abstract{
 	public function getMessages(){
 		return Mage::app()->getLayout()->getMessagesBlock()->getGroupedHtml();
 	}
+
+    /**
+     * Returns cms menu block
+     * @return string
+     */
+    public function getCmsMainmenu(){
+        $block = Mage::app()->getLayout()->createBlock('customwidget/menu', 'cms_mainmenu');
+        $block->setBlockId('mainmenu');
+
+        return $block->toHtml();
+    }
 }
