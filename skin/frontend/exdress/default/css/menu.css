@@ -10,10 +10,8 @@
  */
 /**************** Flyout Menu Bar */
 .menu-box{
-    background:none no-repeat scroll 0 0 #FF8A00;
-    border-top:1px solid #B21E00;
     float:left;
-    margin-top:1px;
+    padding: 15px 0 10px;
     position:relative !important;
 }
 .menu{
@@ -35,7 +33,6 @@
 .menu li:hover{
     z-index:2;
     cursor:pointer;
-    background:none no-repeat scroll 0 0 #888;
 }
 .menu li small{
     color:#F5F5F5;
@@ -54,10 +51,10 @@
     font-weight:bold;
 }
 .menu li:hover a{
-    color:#FFF;
+    color:#FFF !important;
 }
 .menu li div span{
-    color:#FF8A00;
+    color:#FFF;
     cursor:default;
     font-size:14px;
     letter-spacing:0.5px;
@@ -102,8 +99,6 @@
     font-size:12px;
     padding:0 0 0 8px;
 }
-.menu li:hover div a:hover{background:#EEEEEE;}
-.menu li ul li a:hover{color:#FF8A00;}
 /* Right aligned menu item */
 .menu .right{
     border:none;
@@ -131,7 +126,6 @@
     -moz-box-shadow:0 3px 6px -3px #999;
     -webkit-box-shadow:0 3px 6px -3px #999;
     box-shadow:0 3px 6px -3px #999;
-    border:10px solid #888;
     padding:10px;
     text-align:left;
     cursor:default;
@@ -148,7 +142,6 @@
     -moz-box-shadow:0 3px 6px -3px #999;
     -webkit-box-shadow:0 3px 6px -3px #999;
     box-shadow:0 3px 6px -3px #999;
-    border:10px solid #E7160F;
     padding:10px;
     text-align:left;
     cursor:default;
@@ -193,7 +186,7 @@
 .menu .dropdown_2columns{width:368px;}
 .menu .dropdown_3columns{width:500px;}
 .menu .dropdown_4columns{width:670px;}
-.menu .dropdown_5columns{width:920px; /*765px;*/}
+.menu .dropdown_5columns{width:940px; /*765px;*/}
 
 /* Showing Drop Down on Mouse Hover - Left aligned */
 .menu li:hover .dropdown_1columns,
@@ -379,25 +372,21 @@
     margin:-1px 0 0 0;
 }
 .menu li.position-right-li{
-    border-right:1px solid #FFC24F;
     position:static;
 }
-.menu li.position-right-li div.spacer{
+.menu li div.spacer{
     position:relative;
     z-index:110;
-    height:29px;
+    height: 35px;
     width:100%;
-    background:#888;
-    margin:0px 0 0 -6px;
+    margin:0px 0 0 -5px;
     padding:0 5px 0;
-    border-left:1px solid #FFC24F;
-    border-right:1px solid #FFC24F;
 }
 .menu li:hover div.position-right{
     position:absolute;
     right:0;
     left:auto;
-    top:48px;
+    top:60px;
 }
 .menu .levels li:hover{
     cursor:pointer;

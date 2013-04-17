@@ -21,11 +21,12 @@ class CDD_FlyoutMenu_Block_Catalogmenu
     extends Mage_Core_Block_Template
     implements Mage_Widget_Block_Interface
 {
-    /*public function _prepareLayout()
+    public function _prepareLayout()
     {
         return parent::_prepareLayout();
     }
 
+    /**
     public function getCatalogmenu()
     {
         if (!$this->hasData('catalogmenu')){
@@ -37,37 +38,15 @@ class CDD_FlyoutMenu_Block_Catalogmenu
     public function getBlockContent()
     {
         $ulClass = $this->getData('ul_class');
-        $levelClass = $this->getData('level_class');
+        $levelClass = $this->getData('level_class') ? $this->getData('level_class') : "0";
         $type = $this->getData('set_layout_menu');
 
-        if(!$levelClass){
-            $levelClass = 0;
-        }
+        $ulId = $this->getData('ul_id') ? "id='$this->getData('ul_id')'" : '';
+        $categoryId = $this->getData('category') ? $this->getData('category') : Mage::app()->getStore()->getRootCategoryId();
+        $noneUlRoot	= $this->getData('none_ul_root') ? $this->getData('none_ul_root') : "0";
+        $noneFirstLi = $this->getData('none_li_first_class') ? $this->getData('none_li_first_class')  : "0";
 
-        $ulId = $this->getData('ul_id');
-        if($ulId){
-            $ulIdHtml = "id='$ulId'";
-        }
-
-        $categoryId = $this->getData('category');
-        
-        if(!$categoryId)
-            $categoryId = Mage::app()->getStore()->getRootCategoryId();
-
-        $noneUlRoot	= $this->getData('none_ul_root');
-
-        if(!$noneUlRoot)
-            $noneUlRoot = "0";
-
-        $noneFirstLi = $this->getData('none_li_first_class');
-
-        if(!$noneFirstLi)
-            $noneFirstLi = "0";
-
-        $noneLastLi = $this->getData('none_li_last_class');
-
-        if(!$noneLastLi)
-            $noneLastLi = "0";
+        $noneLastLi = $this->getData('none_li_last_class') ? $this->getData('none_li_last_class') : "0";
 
         Mage::register('category_id_widget', $categoryId);
         Mage::register('none_li_first_class',$noneFirstLi);
@@ -79,7 +58,7 @@ class CDD_FlyoutMenu_Block_Catalogmenu
         $navigation = new CDD_FlyoutMenu_Block_Catalognavigation();
 
         if($noneUlRoot == "0"){
-            $first = "<ul class='$ulClass' $ulIdHtml >";
+            $first = "<ul class='$ulClass' $ulId >";
             $last = "</ul>";
         }
         else {
