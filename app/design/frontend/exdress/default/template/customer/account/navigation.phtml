@@ -46,6 +46,7 @@
             	//if ($_link['name']=='OAuth Customer Tokens') $_links2[9] = $_link;
             	if ($_link['name']=='newsletter') $_links2[4] = $_link;
             	if ($_link['name']=='downloadable_products') $_links2[11] = $_link;
+            	//if ($_link['name']=='OAuth Customer Tokens') $_links2[8] = $_link;
             }   
             ?>                  
             <?php $_index = 1; ?>
@@ -53,6 +54,7 @@
             <?php // foreach ($_links as $_link): ?>
             <?php for ($i=0;$i<=$_count;$i++):?>
             <?php // print_r($_links2[$i]['name']);?>
+                <?php if (($i!=8)&&($i!=5)&&($i!=10)&&($i!=9)): ?>
                 <?php if (($_links2[$i]['name']=='account')||($_links2[$i]['name']=='account_edit')||
                 ($_links2[$i]['name']=='orders')||($_links2[$i]['name']=='reviews')||($_links2[$i]['name']=='tags')||
                 ($_links2[$i]['name']=='wishlist')||($_links2[$i]['name']=='newsletter')||($_links2[$i]['name']==' downloadable_products')):?>
@@ -63,6 +65,7 @@
                     <li <?php if (($_links2[$i]['name']=='account')||($_links2[$i]['name']=='account_edit')||($_links2[$i]['name']=='orders')):?>style="font-size:15px;"<?php endif;?> <?php echo ($_last ? ' class="last"' : '') ?>><a href="<?php echo $_links2[$i]->getUrl() ?>"><?php echo $_links2[$i]->getLabel() ?></a></li>
                 <?php endif; ?>
                 <?php  endif;?>
+                <?php endif;?>
             <?php // endforeach; ?>
             <?php endfor;?>
         </ul>
