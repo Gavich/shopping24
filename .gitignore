@@ -1,0 +1,18 @@
+# IDE settings
+.project
+.metadata/
+.settings/
+.buildpath
+.classpath
+.idea/
+*.iml
+nbproject/
+
+# Magento
+app/etc/local.xml
+media/*
+var/*
+google*.html
+downloader/.cache/*
+
+
