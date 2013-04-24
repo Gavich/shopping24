@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Pack_Customer>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Pack_Customer>
+    </modules>
+</config>
