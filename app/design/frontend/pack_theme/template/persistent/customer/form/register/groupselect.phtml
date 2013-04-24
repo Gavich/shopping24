@@ -1,0 +1,15 @@
+<?php $customer_groups = Mage::helper('customer')->getGroups()->toOptionArray(); ?>
+
+<fieldset class="group-select">
+<h4 class="legend"><?php echo $this->__('Customer Group') ?></h4>
+<ul>
+<?php foreach($customer_groups as $cg) { ?>
+	<li class="f-left" style="margin: 2px 4px;" >
+		<input type="radio" name="group_id" id="group_id" 
+			value="<?php echo $cg['value']; ?>" 
+			<?php if ($cg['value']==1) echo 'checked=1' ?>  />
+		<label><?php echo $cg['label']; ?></label>
+	</li>
+<?php } //end foreach?>
+</ul>
+</fieldset>
