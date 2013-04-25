@@ -17,8 +17,6 @@ class TC_Import_Model_Updater{
 	public function getDimensionsArray($id, $storeId){
 		$result = array();
 		$url = Mage::getResourceModel('catalog/product')->getAttributeRawValue($id, 'original_url', $storeId);
-        //удаляем  лишнее с урл 
-		Mage::log($url."    ", 1, 'gavich.log');	
 		$url=preg_replace("/;[a-zA-Z0-9\-\=\_]*/","",$url);
 		Mage::log($url."    ", 1, 'gavich.log');	
 		$config = array(
@@ -27,18 +25,6 @@ class TC_Import_Model_Updater{
 			);
 		$client = new Zend_Http_Client($url, $config);
         $response = $client->request('GET');
-		/*
-		Mage::log($response->getStatus()."==status    ", 1, 'gavich.log');	
-		$redi=$response->isRedirect();
-		if ($redi===true) {Mage::log("==poslali    ", 1, 'gavich.log');	}
-		 else {Mage::log("==neposlali    ", 1, 'gavich.log');	}
-		 $redi1=(string)$redi;
-		Mage::log($redi1."==redir    ", 1, 'gavich.log');	
-	
-		$hedi=$response->getHeadersAsString();
-		Mage::log($hedi."==header  ssss  ", 1, 'gavich.log');	
-			Mage::log($client->getUri()."== ", 1, 'gavich.log');	
-		Mage::log($client->getRedirectionsCount ()."==count ", 1, 'gavich.log');	*/
 	
 		if ($response->getStatus() != 200){
 			throw new Exception('Bad url for id: ' . $id);
@@ -64,7 +50,6 @@ class TC_Import_Model_Updater{
 		foreach((array) $dimensions['articles'] as $article){Mage::log("start", 1, 'gavich.log');
 			if (isset($article['variations'])){
 				foreach((array)$article['variations'] as $variation){
-				    /// обрезаем sku
 					Mage::log(" sku  ".$variation['sku'], 1, 'gavich.log');	
 				    $my_sku_internal=$variation['sku'];
 			    	$my_sku_internal= substr($my_sku_internal,0,strlen($my_sku_internal)-5);
