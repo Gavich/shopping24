@@ -938,7 +938,6 @@ p.required{
 	color:#FF8A00;
 	font-size:16px;
 	line-height:20px;
-	text-transform:lowercase;
 	font-weight:bold;
 	margin:0;
 	display:inline;
@@ -2523,7 +2522,6 @@ tr.summary-details-excluded{
 .block-account .block-content li.current{
 	padding:7px 0 6px;
 	color:#FF8A00;
-	text-transform:lowercase;
 	padding:7px 0 5px;
 }
 .block-account .block-content li.current strong{
@@ -6772,9 +6770,6 @@ button.btn-continue span,
 .registered-users button.button,
 .customer-account-create .buttons-set button.button,
 .customer-account-forgotpassword .buttons-set button.button,
-.customer-account-edit .buttons-set button.button,
-.customer-address-form .buttons-set button.button,
-.newsletter-manage-index .buttons-set button.button,
 .opc-billing .buttons-set button.button,
 #billing-buttons-container button.button,
 #shipping-method-buttons-container  button.button,
@@ -6843,10 +6838,8 @@ button.btn-cart	span span{
 .product-shop button.btn-cart:hover span span{
 	background:url("../images/cdd_add_cart.png") no-repeat scroll 0 5px transparent;
 }
-.dashboard .box-account button.button{
-	position:absolute;
-	right:20px;
-	top:3px;
+.customer-account-index .my-account .buttons-set{
+    padding: 20px 20px 10px;
 }
 .dashboard .box-head{
 	padding:4px 20px 3px !important;
@@ -7019,7 +7012,6 @@ button.btn-cart	span span{
 	margin:0;
 	font-size:16px;
 	font-weight:bold;
-	text-transform:lowercase;
 	background-position:0 0;
 	background-repeat:no-repeat;
 	color:#FF8A00;
