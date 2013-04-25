@@ -10,40 +10,41 @@
             <customer>
                 <rewrite>
                     <account_navigation>Pack_Customer_Block_Account_Navigation</account_navigation>
+                    <form_login>Pack_Customer_Block_Form_Login</form_login>
                 </rewrite>
             </customer>
         </blocks>
-  <frontend>
-  <routers>
-     <customer>
-         <args>
-           <modules>
-             <Pack_Customer before="Mage_Customer">Pack_Customer</Pack_Customer>
-           </modules>
-           <modules>
-             <Pack_Profile before="Mage_Customer">Pack_Profile</Pack_Profile>
-           </modules>
-         </args>
-     </customer>     
-   </routers>
-  </frontend>       
-<translate>
-  <modules>
-    <Pack_Customer>
-      <files>
-        <default>Pack_Customer.csv</default>
-       </files>
-    </Pack_Customer>
-  </modules>
-</translate>
-<frontend>
-        <layout>
-            <updates>
+        <frontend>
+            <routers>
+                <customer>
+                    <args>
+                        <modules>
+                            <Pack_Customer before="Mage_Customer">Pack_Customer</Pack_Customer>
+                        </modules>
+                        <modules>
+                            <Pack_Profile before="Mage_Customer">Pack_Profile</Pack_Profile>
+                        </modules>
+                    </args>
+                </customer>
+            </routers>
+        </frontend>
+        <translate>
+            <modules>
+                <Pack_Customer>
+                    <files>
+                        <default>Pack_Customer.csv</default>
+                    </files>
+                </Pack_Customer>
+            </modules>
+        </translate>
+        <frontend>
+            <layout>
+                <updates>
                     <checkout>
-    	                 <file>customermod.xml</file>
-    		</checkout>
-    	</updates>
-    </layout>
-</frontend>
-    </global>  
+                        <file>customermod.xml</file>
+                    </checkout>
+                </updates>
+            </layout>
+        </frontend>
+    </global>
 </config>

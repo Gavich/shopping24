@@ -27,7 +27,7 @@
 ?>
 <div class="my-wishlist">
 <div class="page-title">
-    <h1><?php echo $this->__('my account') ?></h1>
+    <h1><?php echo Mage::helper('customer')->__('My Account') ?></h1>
 </div>
     <div class="page-title title-buttons last">
         <?php if ($this->helper('wishlist')->isRssAllow() && $this->hasWishlistItems()): ?>

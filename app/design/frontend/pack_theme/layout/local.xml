@@ -1,7 +1,6 @@
 <layout>
 
     <customer_account translate="label">
-
         <reference name="customer_account_navigation">
             <action method="removeLinkByName"><name>my downloadable products</name></action>
             <action method="removeLinkByLabel"><name>My Applications</name></action>
@@ -10,7 +9,6 @@
             <action method="removeLinkByLabel"><name>Billing Agreements</name></action>            
             <action method="orderLinksByArray"><name></name></action>                                    
         </reference>
-
     </customer_account>
 
 </layout>
