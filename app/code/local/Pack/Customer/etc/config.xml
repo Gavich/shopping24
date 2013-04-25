@@ -10,6 +10,7 @@
             <customer>
                 <rewrite>
                     <account_navigation>Pack_Customer_Block_Account_Navigation</account_navigation>
+                    <form_login>Pack_Customer_Block_Form_Login</form_login>
                 </rewrite>
             </customer>
         </blocks>
