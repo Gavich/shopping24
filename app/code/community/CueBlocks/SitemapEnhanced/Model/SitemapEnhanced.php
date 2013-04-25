@@ -879,7 +879,7 @@ class CueBlocks_SitemapEnhanced_Model_SitemapEnhanced extends Mage_Sitemap_Model
                 $url = Mage::app()->getStore($this->getStoreId())->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) . $fileName;
                 $url = $this->getHelper()->escapeHtml($url);
 
-                $xml = sprintf('<url><loc>%s</loc><lastmod>%s</lastmod></url>', $url, $this->_date);
+                $xml = sprintf('<sitemap><loc>%s</loc><lastmod>%s</lastmod></sitemap>', $url, $this->_date);
                 $this->_addLink($xml, 'index');
             }
         }

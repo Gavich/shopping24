@@ -14,5 +14,5 @@ media/*
 var/*
 google*.html
 downloader/.cache/*
-
-
+sitemap/*
+mysitemap/*

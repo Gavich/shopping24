@@ -21,8 +21,9 @@
         <?php echo $this->getChildHtml('header') ?>
         <?php $pageTitle= $this->getLayout()->getBlock('head')->getTitle(); ?>
         <?php if ($this->getUrl('') == $this->getUrl(' * / * / * ', array('_current'=>true, '_use_rewrite'=>true))){?>
-        <?php echo $this->getChildHtml('slideshow') ?>
-        <?php echo $this->getChildHtml('brands_slider') ?>
+			<?php echo $this->getChildHtml('slideshow') ?>
+			<?php echo $this->getChildHtml('brands_slider') ?>
+			<?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-cat')->toHtml() ?>
         <?php } ?>
         <div class="main-container col1-layout">
             <div class="main">
@@ -30,7 +31,7 @@
                 <div class="col-main">
                     <div class="col-inner" id="col-inner">
                         <?php echo $this->getChildHtml('global_messages') ?>
-                        <?php echo $this->getChildHtml('products_slider') ?>
+                        <?php echo $this->getChildHtml('products_slider') ?>			
                         <?php echo $this->getChildHtml('content') ?>
                         <?php echo $this->getChildHtml('dailytopproduct') ?>
                         <?php echo $this->getChildHtml('exdressme') ?>

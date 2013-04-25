@@ -126,6 +126,11 @@ class TC_Import_Model_Converter_Main{
 				case 'is_photo_processed':
 					$product[$field] = TC_Import_Model_Converter_Main::getDefaultPhotoAttribute();
 					break;
+				case 'visibility':
+					$product[$field] = $product['type'] == 'simple'
+										? Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE
+										: Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH;
+					break;
 			}
 		}
 
