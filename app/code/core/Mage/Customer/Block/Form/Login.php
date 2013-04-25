@@ -37,11 +37,8 @@ class Mage_Customer_Block_Form_Login extends Mage_Core_Block_Template
 
     protected function _prepareLayout()
     {
-        /**
-         * quick fix wrong page titles
-         */
-        /*$this->getLayout()->getBlock('head')->setTitle(Mage::helper('customer')->__('Customer Login'));
-        return parent::_prepareLayout();*/
+        $this->getLayout()->getBlock('head')->setTitle(Mage::helper('customer')->__('Customer Login'));
+        return parent::_prepareLayout();
     }
 
     /**

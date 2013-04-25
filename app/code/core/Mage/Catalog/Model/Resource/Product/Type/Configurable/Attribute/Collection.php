@@ -184,20 +184,20 @@ class Mage_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection
             $select = $this->getConnection()->select()
                 ->from(array('def' => $this->_labelTable))
                 ->joinLeft(
-                array('store' => $this->_labelTable),
-                $this->getConnection()->quoteInto('store.product_super_attribute_id = def.product_super_attribute_id AND store.store_id = ?', $this->getStoreId()),
-                array(
-                    'use_default' => $useDefaultCheck,
-                    'label' => $labelCheck
-                ))
+                    array('store' => $this->_labelTable),
+                    $this->getConnection()->quoteInto('store.product_super_attribute_id = def.product_super_attribute_id AND store.store_id = ?', $this->getStoreId()),
+                    array(
+                        'use_default' => $useDefaultCheck,
+                        'label' => $labelCheck
+                    ))
                 ->where('def.product_super_attribute_id IN (?)', array_keys($this->_items))
                 ->where('def.store_id = ?', 0);
 
-            $result = $this->getConnection()->fetchAll($select);
-            foreach ($result as $data) {
-                $this->getItemById($data['product_super_attribute_id'])->setLabel($data['label']);
-                $this->getItemById($data['product_super_attribute_id'])->setUseDefault($data['use_default']);
-            }
+                $result = $this->getConnection()->fetchAll($select);
+                foreach ($result as $data) {
+                    $this->getItemById($data['product_super_attribute_id'])->setLabel($data['label']);
+                    $this->getItemById($data['product_super_attribute_id'])->setUseDefault($data['use_default']);
+                }
         }
         return $this;
     }
@@ -240,16 +240,16 @@ class Mage_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection
             $values = array();
 
             foreach ($this->_items as $item) {
-                $productAttribute = $item->getProductAttribute();
-                if (!($productAttribute instanceof Mage_Eav_Model_Entity_Attribute_Abstract)) {
-                    continue;
-                }
-                $options = $productAttribute->getFrontend()->getSelectOptions();
-                foreach ($options as $option) {
-                    foreach ($this->getProduct()->getTypeInstance(true)->getUsedProducts(null, $this->getProduct()) as $associatedProduct) {
+               $productAttribute = $item->getProductAttribute();
+               if (!($productAttribute instanceof Mage_Eav_Model_Entity_Attribute_Abstract)) {
+                   continue;
+               }
+               $options = $productAttribute->getFrontend()->getSelectOptions();
+               foreach ($options as $option) {
+                   foreach ($this->getProduct()->getTypeInstance(true)->getUsedProducts(null, $this->getProduct()) as $associatedProduct) {
                         if (!empty($option['value'])
                             && $option['value'] == $associatedProduct->getData(
-                                $productAttribute->getAttributeCode())) {
+                                                        $productAttribute->getAttributeCode())) {
                             // If option available in associated product
                             if (!isset($values[$item->getId() . ':' . $option['value']])) {
                                 // If option not added, we will add it.
@@ -265,8 +265,8 @@ class Mage_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection
                                 );
                             }
                         }
-                    }
-                }
+                   }
+               }
             }
 
             foreach ($pricings[0] as $pricing) {

@@ -707,20 +707,6 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
      */
     public function editAction()
     {
-            if (count($this->_getSession()->getCustomer()->getAddresses())) {
-            $this->loadLayout();
-            $this->_initLayoutMessages('customer/session');
-            $this->_initLayoutMessages('catalog/session');
-
-            $block = $this->getLayout()->getBlock('address_book');
-            if ($block) {
-                $block->setRefererUrl($this->_getRefererUrl());
-            }
-            $this->renderLayout();
-        } else {
-            //$this->getResponse()->setRedirect(Mage::getUrl('*/*/new'));
-            //$this->getResponse()->setRedirect(Mage::getUrl('customer/address/new'));
-        }        
         $this->loadLayout();
         $this->_initLayoutMessages('customer/session');
         $this->_initLayoutMessages('catalog/session');

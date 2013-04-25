@@ -148,12 +148,6 @@ class Mage_Adminhtml_Block_Shipping_Carrier_Tablerate_Grid extends Mage_Adminhtm
             'index'     => 'dest_zip',
             'default'   => '*',
         ));
-        
-        $this->addColumn('dest_r', array(
-            'header'    => Mage::helper('adminhtml')->__('r'),
-            'index'     => 'dest_r',
-            'default'   => '*',
-        ));        
 
         $label = Mage::getSingleton('shipping/carrier_tablerate')
             ->getCode('condition_name_short', $this->getConditionName());

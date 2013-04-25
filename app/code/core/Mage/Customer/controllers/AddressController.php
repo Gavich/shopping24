@@ -58,8 +58,6 @@ class Mage_Customer_AddressController extends Mage_Core_Controller_Front_Action
      */
     public function indexAction()
     {
-    	$this->_redirect('customer/account/edit/');
-    	
         if (count($this->_getSession()->getCustomer()->getAddresses())) {
             $this->loadLayout();
             $this->_initLayoutMessages('customer/session');
