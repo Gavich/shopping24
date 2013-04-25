@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ak_NovaPoshta>
+            <version>0.1.1</version>
+        </Ak_NovaPoshta>
+    </modules>
+    <global>
+        <models>
+            <novaposhta>
+                <class>Ak_NovaPoshta_Model</class>
+                <resourceModel>novaposhta_resource</resourceModel>
+            </novaposhta>
+            <novaposhta_resource>
+                <class>Ak_NovaPoshta_Model_Resource</class>
+                <entities>
+                    <city>
+                        <table>novaposhta_city</table>
+                    </city>
+                    <warehouse>
+                        <table>novaposhta_warehouse</table>
+                    </warehouse>
+                </entities>
+            </novaposhta_resource>
+        </models>
+        <blocks>
+            <novaposhta>
+                <class>Ak_NovaPoshta_Block</class>
+            </novaposhta>
+        </blocks>
+        <helpers>
+            <novaposhta>
+                <class>Ak_NovaPoshta_Helper</class>
+            </novaposhta>
+        </helpers>
+        <resources>
+            <novaposhta_setup>
+                <setup>
+                    <module>Ak_NovaPoshta</module>
+                </setup>
+            </novaposhta_setup>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <novaposhta>
+                <use>admin</use>
+                <args>
+                    <module>Ak_NovaPoshta</module>
+                    <frontName>novaposhta</frontName>
+                </args>
+            </novaposhta>
+        </routers>
+    </admin>
+    <crontab>
+        <jobs>
+            <novaposhta_import_city_and_warehouse>
+                <schedule>
+                    <cron_expr>1 2 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>ak_novaposhta/import::runWarehouseAndCityMassImport</model>
+                </run>
+            </novaposhta_import_city_and_warehouse>
+        </jobs>
+    </crontab>
+    <default>
+        <carriers>
+            <novaposhta>
+                <!-- disabled by default not to propose unconfigured shipping method to customer -->
+                <active>0</active>
+                <!-- allow only for specific countries flag -->
+                <sallowspecific>1</sallowspecific>
+                <!-- allow only for Ukraine -->
+                <specificcountry>UA</specificcountry>
+                <!-- carrier model -->
+                <model>novaposhta/carrier_novaPoshta</model>
+                <!-- carrier title -->
+                <title>Новая Почта</title>
+                <!-- error message -->
+                <specificerrmsg>Этот способ доставки на текущий момент не доступен. Если вы желаете, чтобы мы доставили заказ Новой Почтой, обратитесь к менеджеру интернет-магазина.</specificerrmsg>
+                <api_url>http://orders.novaposhta.ua/xml.php</api_url>
+                <enable_log>0</enable_log>
+            </novaposhta>
+        </carriers>
+    </default>
+</config>

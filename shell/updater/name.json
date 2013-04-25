@@ -1,9 +1,9 @@
 {
     "source" : {
-        "host" : "localhost",
-        "username" : "root",
-        "password" : "",
-        "dbname" : "source",
+        "host" : "188.40.70.149",
+        "username" : "gavich",
+        "password" : "1234qwe",
+        "dbname" : "gt_89c21",
         "initStatements" : "SET NAMES utf8",
         "model" : "mysql4",
         "type" : "pdo_mysql",
