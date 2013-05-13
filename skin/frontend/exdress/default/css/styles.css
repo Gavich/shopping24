@@ -475,11 +475,11 @@ button.disabled span{
 	background:#bbb !important;
 }
 button.btn-checkout span{
-	height:40px;
+	height:30px;
 	border:0;
 	background:none repeat scroll 0 0 #FF8A00;
 	padding:0 0 0 9px;
-	font:bold 16px/40px Arial, Helvetica, sans-serif;
+	font:bold 12px/40px Arial, Helvetica, sans-serif;
 	color:#fff;
 }
 button.btn-checkout:hover span span{
