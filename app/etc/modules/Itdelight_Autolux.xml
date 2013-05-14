@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Itdelight_Autolux>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Itdelight_Autolux>
+    </modules>
+</config>

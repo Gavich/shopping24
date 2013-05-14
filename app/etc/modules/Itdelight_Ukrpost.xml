@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Itdelight_Ukrpost>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Itdelight_Ukrpost>
+    </modules>
+</config>

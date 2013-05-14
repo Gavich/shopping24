@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Itdelight_Autolux>
+            <version>0.1.1</version>
+        </Itdelight_Autolux>
+    </modules>
+    <global>
+        <models>
+            <autolux>
+                <class>Itdelight_Autolux_Model</class>
+            </autolux>
+        </models>
+        <helpers>
+            <autolux>
+                <class>Itdelight_Autolux_Helper</class>
+            </autolux>
+        </helpers>
+        <blocks>
+            <autolux>
+                <class>Itdelight_Autolux_Block</class>
+            </autolux>
+        </blocks>
+    </global>
+    <default>
+        <carriers>
+            <autolux>
+                <!-- disabled by default not to propose unconfigured shipping method to customer -->
+                <active>1</active>
+                <title>Autolux</title>
+                <name>Autolux</name>
+                <model>autolux/carrier_autolux</model>
+            </autolux>
+        </carriers>
+    </default>
+</config>

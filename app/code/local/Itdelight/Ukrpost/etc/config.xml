@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Itdelight_Ukrpost>
+            <version>0.1.1</version>
+        </Itdelight_Ukrpost>
+    </modules>
+    <global>
+        <models>
+            <ukrpost>
+                <class>Itdelight_Ukrpost_Model</class>
+            </ukrpost>
+        </models>
+        <helpers>
+            <ukrpost>
+                <class>Itdelight_Ukrpost_Helper</class>
+            </ukrpost>
+        </helpers>
+        <blocks>
+            <ukrpost>
+                <class>Itdelight_Ukrpost_Block</class>
+            </ukrpost>
+        </blocks>
+    </global>
+    <default>
+        <carriers>
+            <ukrpost>
+                <!-- disabled by default not to propose unconfigured shipping method to customer -->
+                <active>1</active>
+                <title>Ukrpost</title>
+                <name>Ukrpost</name>
+                <model>ukrpost/carrier_ukrpost</model>
+            </ukrpost>
+        </carriers>
+    </default>
+</config>
