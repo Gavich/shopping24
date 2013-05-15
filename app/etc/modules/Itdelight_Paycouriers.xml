@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Itdelight_Paycouriers>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Itdelight_Paycouriers>
-    </modules>
-</config>
