@@ -48,6 +48,9 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Grid extends Mage_Adminhtml_Bl
                 'index' => 'keywords'
             )
         );
+          
+           
+          
            $this->addColumn('action',
             array(
                 'header'    => Mage::helper('metadata')->__('Action'),

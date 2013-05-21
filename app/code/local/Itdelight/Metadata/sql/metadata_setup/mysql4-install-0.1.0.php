@@ -6,8 +6,7 @@ $installer->run("
   CREATE TABLE `{$installer->getTable('metadata/metadata')}` (
      `metadata_id` int(11) NOT NULL auto_increment,
      `category_id` int,
-     `page` int,
-     `title` varchar(50),
+     `title` text,
      `description` text,
      `keywords` text,
      PRIMARY KEY  (`metadata_id`)

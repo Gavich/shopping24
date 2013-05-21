@@ -15,6 +15,12 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit extends Mage_Adminhtml_Bl
                   'onclick' => 'saveAndContinueEdit()',
                   'class' => 'save',
         ), -100);
+      
+        $this->_addButton('saveandcontinue', array(
+            'label'     => Mage::helper('adminhtml')->__('Apply to'),
+            'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/button1Click') . '\')',
+            'class'     => 'save',
+        ), -1,4);
         $this->_updateButton('save', 'label', Mage::helper('metadata')->__('Save Metadata'));
  
         $this->_formScripts[] = "

@@ -11,14 +11,17 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
    }
      public function editAction()
     {
-         $id = $this->getRequest()->getParam('id', null);
+        $id = $this->getRequest()->getParam('id', null);
+        Mage::Log($id,null,'sss.log');
         $model = Mage::getModel('metadata/metadata');
+        Mage::Log($model->load((int) $id),null,'sss.log');
         if ($id) {
             $model->load((int) $id);
             if ($model->getId()) {
                 $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
                 if ($data) {
                     $model->setData($data)->setId($id);
+                    
                 }
             } else {
                 Mage::getSingleton('adminhtml/session')->addError(Mage::helper('metadata')->__('Metadata does not exist'));
@@ -45,15 +48,36 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
         $storeId        = $this->getRequest()->getParam('store');
         $redirectBack   = $this->getRequest()->getParam('back', false);
         $metadataId      = $this->getRequest()->getParam('category_id');
-        $isEdit         = (int)($this->getRequest()->getParam('id') != null);
-        $metadata=Mage::getModel('metadata/metadata');
+        $isEdit         = (int)($this->getRequest()->getParam('id'));
+        $metadata=Mage::getModel('metadata/metadata');        
+          
          $data=$this->getRequest()->getPost();
          try {
+             if($isEdit){
+                 $metadata->load($isEdit);
+                 $metadata->setKeywords($data['keywords']);
+                 $metadata->setTitle($data['title']);
+                 $metadata->setDescription($data['description']);
+                 $metadata->setProducts($data['products']);
+                 $metadata->setCategoryId($data['category_id']);
+                 $metadata->setCategories($data['categories']);
+                 $metadata->setCatChild($data['cat_child']);
+                 $metadata->setProdCat($data['prod_cat']);
+                 $metadata->setProdChildcat($data['prod_childcat']);
+                 $metadata->setProdForm($data['prod_form']);
+                 $metadata->setCat($data['cat']);
+                 $metadata->setCatForm($data['cat_form']);
+                 Mage::Log($metadata->getTitle(),null,'data.log');
+                 $metadata->save();
+                
+             }else{
+              
                 $metadata->setData($data);
                 $metadata->save();
                 $metadataId = $metadata->getId();
-
-                /**
+             }
+               
+             /**
                  * Do copying data to stores
                  */
                 if (isset($data['copy_to_stores'])) {
