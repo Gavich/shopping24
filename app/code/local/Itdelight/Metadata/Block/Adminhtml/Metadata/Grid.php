@@ -10,6 +10,8 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Grid extends Mage_Adminhtml_Bl
         $this->setId('metadata');
         $this->setDefaultDir('asc');
         $this->setSaveParametersInSession(true);
+        $this->setUseAjax(true);
+        $this->setVarNameFilter('metadata_filter');
     }
      
     protected function _prepareCollection()
@@ -48,7 +50,24 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Grid extends Mage_Adminhtml_Bl
                 'index' => 'keywords'
             )
         );
-          
+          $this->addColumn('category_id',
+            array(
+                'header'=> $this->__('Category'),
+                'index' => 'category_id'
+            )
+        );
+          $this->addColumn('products',
+            array(
+                'header'=> $this->__('Products'),
+                'index' => 'products'
+            )
+        );
+          $this->addColumn('categories',
+            array(
+                'header'=> $this->__('Categories'),
+                'index' => 'categories'
+            )
+        );
            
           
            $this->addColumn('action',

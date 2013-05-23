@@ -12,9 +12,9 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
      public function editAction()
     {
         $id = $this->getRequest()->getParam('id', null);
-        Mage::Log($id,null,'sss.log');
+        
         $model = Mage::getModel('metadata/metadata');
-        Mage::Log($model->load((int) $id),null,'sss.log');
+
         if ($id) {
             $model->load((int) $id);
             if ($model->getId()) {
@@ -32,6 +32,10 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
  
         $this->loadLayout();
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
+                $block = $this->getLayout()->getBlock('catalog.wysiwyg.js');
+        if ($block) {
+            $block->setStoreId($model->getStoreId());
+        }
         $this->renderLayout();
 
     }

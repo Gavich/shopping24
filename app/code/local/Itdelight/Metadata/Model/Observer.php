@@ -6,6 +6,30 @@ class Itdelight_Metadata_Model_Observer {
     {
         
     }
+    public function patternCatalogFunction($text_field,$category){
+        
+        $categories=$category->getParentIds();
+        foreach($categories as $object){
+            $my_object=Mage::getModel('metadata/metadata')->load($object);
+          $text_field=str_replace("<category>", $object->getName(), $text_field);
+        }
+        $text_field=str_replace("<category>", $category->getName(), $text_field);
+        
+        return  $text_field;
+      }
+    
+    public function patternProductFunction($text_field,$product){
+        
+        $categories=$product->getCategoryIds();
+       foreach($categories as $category){
+           $object_category=Mage::getModel('catalog/product')->load($category);
+            $text_field=str_replace("<category>", $object_category->getName(), $text_field);
+        }
+        $text_field=str_replace("<product>", $product->getName(), $text_field);
+        $text_field=str_replace("<price>", $product->getPrice(), $text_field);
+        return  $text_field;
+      }
+      
      public function applyToCategoriesOfField($category,$model){
             
             if($model->getCatForm()){
@@ -25,7 +49,7 @@ class Itdelight_Metadata_Model_Observer {
         }
     public function applyToCategoryAndChild($category,$model){
             if($model->getCatChild()){
-                //Mage::Log($parents,null,'catya.log');
+               
                 $parents=$category->getParentIds();
                 
                 foreach($parents as $parent){
@@ -125,9 +149,9 @@ class Itdelight_Metadata_Model_Observer {
     
     public function setProductMetadata($product,$model){
         $page=Mage::getSingleton('core/session')->getPage($page);
-        $custom_keywords=$model->getKeywords();
-        $custom_description=$model->getDescription();
-        $custom_title=$model->getTitle();
+        $custom_keywords=$this->patternProductFunction($model->getKeywords(),$product);
+        $custom_description=$this->patternProductFunction($model->getDescription(),$product);
+        $custom_title=$this->patternProductFunction($model->getTitle(),$product);
         $keywords=$product->getMetaKeyword();
         $description=$product->getMetaDescription();
         $title=$product->getMetaTitle();
@@ -143,9 +167,10 @@ class Itdelight_Metadata_Model_Observer {
     }
     
      public function setCategoryMetadata($category,$model){
-        $custom_keywords=$model->getKeywords();
-        $custom_description=$model->getDescription();
-        $custom_title=$model->getTitle();
+         
+        $custom_keywords=$this->patternProductFunction($model->getKeywords(),$product);
+        $custom_description=$this->patternProductFunction($model->getDescription(),$product);
+        $custom_title=$this->patternProductFunction($model->getTitle(),$product);
         $keywords=$category->getMetaKeywords();
         $description=$category->getMetaDescription();
         $title=$category->getMetaTitle();
@@ -160,8 +185,10 @@ class Itdelight_Metadata_Model_Observer {
     
    public function add_custom_metadata($observer)
    {
+       
         $event=$observer->getEvent();
         $product=$event->getProduct();
+        Mage::Log($product,null,'attribute.log');
          Mage::Log($product->getCategoryIds(),null,'cat.log');
         $customModel=Mage::getModel('metadata/metadata');
         $customCollection=$customModel->getCollection();
