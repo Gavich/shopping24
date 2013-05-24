@@ -11,6 +11,7 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
    }
      public function editAction()
     {
+        
         $id = $this->getRequest()->getParam('id', null);
         
         $model = Mage::getModel('metadata/metadata');
@@ -39,14 +40,34 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
         $this->renderLayout();
 
     }
+       public function categoriesAction()
+    {
+      
+        $this->getResponse()->setBody($this->getLayout()->createBlock('metadata/adminhtml_tree')->toHtml());
+         $this->loadLayout();
+
+    }
     public function newAction()
      {
         
         $this->loadLayout();
+       
          $model = Mage::getModel('metadata/metadata');
          Mage::register('current_metadata', $model);
+         $this->loadLayout();
+        $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
+                $block = $this->getLayout()->getBlock('catalog.wysiwyg.js');
+        if ($block) {
+            $block->setStoreId($model->getStoreId());
+        }
         $this->renderLayout();
      }
+     public function categoriesJsonAction(){
+         
+     $this->getResponse()->setBody($this->getLayout()->createBlock('metadata/adminhtml_tree')
+        ->getCategoryChildrenJson($this->getRequest()->getParam('category')));
+     }
+     
      public function saveAction()
      {
         $storeId        = $this->getRequest()->getParam('store');
@@ -71,8 +92,8 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
                  $metadata->setProdForm($data['prod_form']);
                  $metadata->setCat($data['cat']);
                  $metadata->setCatForm($data['cat_form']);
-                 Mage::Log($metadata->getTitle(),null,'data.log');
-                 $metadata->save();
+                 $metadata->setCategoryIds($data['category_ids']);
+                                $metadata->save();
                 
              }else{
               

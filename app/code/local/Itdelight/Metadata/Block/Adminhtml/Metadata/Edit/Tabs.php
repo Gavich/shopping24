@@ -17,6 +17,12 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tabs extends Mage_Adminht
           'title'     => Mage::helper('metadata')->__('Category  Information'),
           'content'   => $this->getLayout()->createBlock('metadata/adminhtml_metadata_edit_tab_category')->toHtml(),
       ));
+      
+      $this->addTab('categories', array(
+                'label'     => Mage::helper('metadata')->__('Categories'),
+                'url'       => $this->getUrl('*/*/categories', array('_current' => true)),
+                'class'     => 'ajax',
+            ));
 
       return parent::_beforeToHtml();
   }
