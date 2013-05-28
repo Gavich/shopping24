@@ -15,11 +15,13 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
         $id = $this->getRequest()->getParam('id', null);
         
         $model = Mage::getModel('metadata/metadata');
-
+$model->setData('_edit_mode', true);
         if ($id) {
+              Mage::register('current_metadata', $model);
             $model->load((int) $id);
             if ($model->getId()) {
                 $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
+                Mage::Log($data,null,'data.log');
                 if ($data) {
                     $model->setData($data)->setId($id);
                     
@@ -29,7 +31,7 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
                 $this->_redirect('*/*/');
             }
         }
-        Mage::register('current_metadata', $model);
+      
  
         $this->loadLayout();
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
