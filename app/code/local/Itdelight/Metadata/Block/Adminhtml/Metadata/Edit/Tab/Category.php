@@ -66,7 +66,7 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
              'class'     => 'title',
              'required'  => true,
              'name'      => 'title',
-             'note'     => Mage::helper('metadata')->__('The title'),
+//             'note'     => Mage::helper('metadata')->__('The title'),
         ));
  
         $fieldset->addField('description', 'textarea', array(

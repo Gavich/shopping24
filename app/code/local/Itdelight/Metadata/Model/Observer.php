@@ -10,7 +10,7 @@ class Itdelight_Metadata_Model_Observer {
         $string=$model->getCategoryIds();
         $arr=explode(',',$string);
         $var=$arr[1];
-
+Mage::Log($var,null,'cat.log');
         return $var;
     }
     public function patternCatalogFunction($text_field,$category){
@@ -24,9 +24,9 @@ class Itdelight_Metadata_Model_Observer {
            $cat_arr->load($value);
             $text_field=str_replace("<cat".$i.">", $cat_arr->getName(), $text_field);  
             $i++;
+            
         }
         $parent_it=$cat_arr->load($parent);
-        Mage::Log($parent,null,'parent.log');
         $text_field=str_replace("<category>", $category->getName(), $text_field);
         $text_field=str_replace("<parent>", $parent_it->getName(), $text_field);
         
@@ -64,12 +64,9 @@ class Itdelight_Metadata_Model_Observer {
         }
     public function applyToCategoryAndChild($category,$model){
             if($model->getCatChild()){
-               
-                $parents=$category->getParentIds();
-                
+                $parents=$category->getParentIds();              
                 foreach($parents as $parent){
-                if(($model->getCategoryId()==$category->getId())OR($model->getCategoryId()==$parent)){
-                    
+                if(($model->getCategoryId()==$category->getId())OR($model->getCategoryId()==$parent)){                    
                     $this->setCategoryMetadata($category,$model);
                 }
             }
@@ -163,6 +160,7 @@ class Itdelight_Metadata_Model_Observer {
     }
     
     public function setProductMetadata($product,$model){
+        
         $page=Mage::getSingleton('core/session')->getPage($page);
         $custom_keywords=$this->patternProductFunction($model->getKeywords(),$product);
         $custom_description=$this->patternProductFunction($model->getDescription(),$product);
@@ -173,7 +171,6 @@ class Itdelight_Metadata_Model_Observer {
         $newKeywords=$this->generateNewMetadata($keywords,$custom_keywords);
         $newDescription=$this->generateNewMetadata($description,$custom_description);
         $newTitle=$this->generateNewMetadata($title,$custom_title);
-        Mage::Log($newTitle,null,'new.log');
         $product->setMetaKeyword($newKeywords);
         $product->setMetaDescription($newDescription);
         $product->setMetaTitle($newTitle);
@@ -181,7 +178,6 @@ class Itdelight_Metadata_Model_Observer {
     }
     
      public function setCategoryMetadata($category,$model){
-        // Mage::Log('assdasd',null,'ssdds.log');
         $custom_keywords=$this->patternCatalogFunction($model->getKeywords(),$category);
         $custom_description=$this->patternCatalogFunction($model->getDescription(),$category);
         $custom_title=$this->patternCatalogFunction($model->getTitle(),$category);
@@ -193,8 +189,7 @@ class Itdelight_Metadata_Model_Observer {
         $newTitle=$this->generateNewMetadata($title,$custom_title);
         $category->setMetaKeywords($newKeywords);
         $category->setMetaDescription($newDescription);
-        $category->setMetaTitle($newTitle);
-        
+        $category->setMetaTitle($newTitle);        
     }
     
    public function add_custom_metadata($observer)
@@ -202,14 +197,13 @@ class Itdelight_Metadata_Model_Observer {
        
         $event=$observer->getEvent();
         $product=$event->getProduct();
-        Mage::Log($product,null,'attribute.log');
-         Mage::Log($product->getCategoryIds(),null,'cat.log');
         $customModel=Mage::getModel('metadata/metadata');
         $customCollection=$customModel->getCollection();
         $page=Mage::getSingleton('core/session')->getPage($page);
         foreach ($customCollection as $custom)
    {        
             $var=$this->getCategory1($custom);
+            Mage::Log($var,null,'var.log');
             $custom->setCategoryId($var);
             $custom->save();
             $this->generateForProductsOfCat($product,$custom);
@@ -235,6 +229,7 @@ class Itdelight_Metadata_Model_Observer {
      $custom_collection=$custom_model->getCollection();     
         foreach($custom_collection as $item){
         $var=$this->getCategory1($item);
+        Mage::Log($var,null,'var.log');
         $item->setCategoryId($var);
         $item->save();
          $this->applyToCategory($category,$item);

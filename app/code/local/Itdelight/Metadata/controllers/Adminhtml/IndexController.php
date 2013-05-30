@@ -12,19 +12,19 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
      public function editAction()
     {
         
+         
         $id = $this->getRequest()->getParam('id', null);
         
         $model = Mage::getModel('metadata/metadata');
-$model->setData('_edit_mode', true);
+        Mage::register('current_metadata', $model);
+
         if ($id) {
-              Mage::register('current_metadata', $model);
             $model->load((int) $id);
             if ($model->getId()) {
                 $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
-                Mage::Log($data,null,'data.log');
                 if ($data) {
                     $model->setData($data)->setId($id);
-                    
+                   
                 }
             } else {
                 Mage::getSingleton('adminhtml/session')->addError(Mage::helper('metadata')->__('Metadata does not exist'));
@@ -33,12 +33,13 @@ $model->setData('_edit_mode', true);
         }
       
  
-        $this->loadLayout();
+       $this->loadLayout();
+
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
-                $block = $this->getLayout()->getBlock('catalog.wysiwyg.js');
-        if ($block) {
-            $block->setStoreId($model->getStoreId());
-        }
+     $block = $this->getLayout()->getBlock('catalog.wysiwyg.js');
+      if ($block) {
+          $block->setStoreId($model->getStoreId());
+       }
         $this->renderLayout();
 
     }
