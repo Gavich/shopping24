@@ -9,6 +9,28 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
         $this->setTitle(Mage::helper('metadata')->__('Metadata Information'));
        
     }
+    public function getCategoriesArray() {
+
+    $categoriesArray = Mage::getModel('catalog/category')
+            ->getCollection()
+            ->addAttributeToSelect('name')
+            ->addAttributeToSort('path', 'asc')
+            ->load()
+            ->toArray();
+
+    $categories = array();
+    foreach ($categoriesArray as $categoryId => $category) {
+        if (isset($category['name']) && isset($category['level'])) {
+            $categories[] = array(
+                'label' => $category['name'],
+                'level'  =>$category['level'],
+                'value' => $categoryId
+            );
+        }
+    }
+
+    return $categories;
+}
     protected function get_categories(){
 
     $category = Mage::getModel('catalog/category'); 
@@ -44,7 +66,7 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
              'class'     => 'title',
              'required'  => true,
              'name'      => 'title',
-             'note'     => Mage::helper('metadata')->__('The title'),
+//             'note'     => Mage::helper('metadata')->__('The title'),
         ));
  
         $fieldset->addField('description', 'textarea', array(
@@ -121,18 +143,18 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
              'required'  => true,
              'name'      => 'keywords',
         ));
-       
-     $fieldset->addField('cat_select', 'select', array(
-      'label'     => 'Category',
-      'class'     => 'keywords',
-      'required'  => false,
-      'name'      => 'category_id',
-      'values' => $this->get_categories(),
-      'disabled' => false,
-      'readonly' => false,
-      'tabindex' => 1
-    ));
-     
+//       
+//     $fieldset->addField('cat_select', 'select', array(
+//      'label'     => 'Category',
+//      'class'     => 'keywords',
+//      'required'  => false,
+//      'name'      => 'category_id',
+//      'values' => $this->get_categories(),
+//      'disabled' => false,
+//      'readonly' => false,
+//      'tabindex' => 1
+//    ));
+//     
      $fieldset->addField('products', 'text', array(
              'label'     => Mage::helper('metadata')->__('Products'),
              'class'     => 'text',
@@ -148,6 +170,8 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
              'name'      => 'categories',
              'note'     => Mage::helper('metadata')->__('Enter categories id here'),
         ));
+     
+      
         
         $this->setForm($form);
  
