@@ -152,13 +152,12 @@ class Itdelight_Metadata_Model_Observer {
         $count=count($array);
         if(($page>$count)&($count>0)){
             $new_index=$page % $count;
-            $new_data=$product.' '.$array[$new_index-1];
+            $new_data=$array[--$new_index];
         }else{
-            $new_data=$product.' '.$array[--$page];
+            $new_data=$array[--$page];
 
             
         }
-
         return $new_data;
     }
     
