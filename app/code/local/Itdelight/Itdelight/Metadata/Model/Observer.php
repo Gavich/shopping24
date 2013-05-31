@@ -10,7 +10,6 @@ class Itdelight_Metadata_Model_Observer {
         $string=$model->getCategoryIds();
         $arr=explode(',',$string);
         $var=$arr[1];
-Mage::Log($var,null,'cat.log');
         return $var;
     }
     public function patternCatalogFunction($text_field,$category){
@@ -64,19 +63,22 @@ Mage::Log($var,null,'cat.log');
         }
     public function applyToCategoryAndChild($category,$model){
             if($model->getCatChild()){
-                $parents=$category->getParentIds();              
+                $parents=$category->getParentIds();
+               
                 foreach($parents as $parent){
-                if(($model->getCategoryId()==$category->getId())OR($model->getCategoryId()==$parent)){                    
+                if($model->getCategoryId()==$parent){                    
+                    $this->setCategoryMetadata($category,$model); 
+                }      
+            }
+              if($model->getCategoryId()==$category->getId()){
                     $this->setCategoryMetadata($category,$model);
                 }
-            }
             }
         }
     
         public function applyToCategory($category,$model){
             if($model->getCat()){
-              Mage::Log($model->getCategoryId(),null,'sasa.log');
-                if($model->getCategoryId()==$category->getId()){
+                  if($model->getCategoryId()==$category->getId()){
                     $this->setCategoryMetadata($category,$model);
                 }
             }
@@ -146,16 +148,18 @@ Mage::Log($var,null,'cat.log');
     public function generateNewMetadata($product,$custom){
          $page=Mage::getSingleton('core/session')->getPage($page);
         $array=explode("<e>",$custom);
-        $count=substr_count($custom,"<e>");
+        Mage::Log($array,null,'uu.log');
+  //      $count=substr_count($custom,"<e>");
+        $count=count($array);
         if(($page>$count)&($count>0)){
             $new_index=$page % $count;
             $new_data=$array[$new_index];
         }else{
-            $new_data=$product.' '.$array[$page-1];
-       
+            $new_data=$product.' '.$array[--$page];
+       Mage::Log($new_data,null,'new_data.log');
             
         }
-        
+
         return $new_data;
     }
     
@@ -178,6 +182,7 @@ Mage::Log($var,null,'cat.log');
     }
     
      public function setCategoryMetadata($category,$model){
+         Mage::Log('Hello',null,'nnn.log');
         $custom_keywords=$this->patternCatalogFunction($model->getKeywords(),$category);
         $custom_description=$this->patternCatalogFunction($model->getDescription(),$category);
         $custom_title=$this->patternCatalogFunction($model->getTitle(),$category);
