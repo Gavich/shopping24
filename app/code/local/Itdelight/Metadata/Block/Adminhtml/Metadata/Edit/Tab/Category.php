@@ -55,9 +55,9 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
     protected function _prepareForm()
     {
  
-        
+$metadata=Mage::registry('current_metadata');        
         $form = new Varien_Data_Form();
- 
+
      $fieldset = $form->addFieldset('category_metadata', array('legend'=>Mage::helper('metadata')->__('Category Metadata')));
   
   
@@ -66,6 +66,7 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
              'class'     => 'title',
              'required'  => true,
              'name'      => 'title',
+             'value'     => $metadata->getTitle(),
 //             'note'     => Mage::helper('metadata')->__('The title'),
         ));
  
@@ -74,67 +75,73 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
              'class'     => 'description',
              'required'  => true,
              'name'      => 'description',
+             'value'     => $metadata->getDescription(),
         ));
  $fieldset->addField('cat', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to checked category'),
           'name'      => 'cat',
-          'checked' => false,
+        //  'checked' => false,
           'onclick' => "",
           'onchange' => "",
           'value'  => '1',
           'disabled' => false,
-          'tabindex' => 1
+          'tabindex' => 1,
+          'value'=> $metadata->getCat(),
         ));
   
   $fieldset->addField('cat_child', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to checked category and children'),
           'name'      => 'cat_child',
-          'checked' => false,
+       //   'checked' => false,
           'onclick' => "",
           'onchange' => "",
           'value'  => '1',
           'disabled' => false,
-          'tabindex' => 1
+          'tabindex' => 1,
+          'value'=> $metadata->getCatChild(),
         ));
        $fieldset->addField('cat_form', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to categories in form'),
           'name'      => 'cat_form',
-          'checked' => false,
+     //     'checked' => false,
           'onclick' => "",
           'onchange' => "",
           'value'  => '1',
           'disabled' => false,
-          'tabindex' => 1
+          'tabindex' => 1,
+           'value'=> $metadata->getCatForm(),
         ));
        $fieldset->addField('prod_cat', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to a products in current category'),
           'name'      => 'prod_cat',
-          'checked' => false,
+       //   'checked' => false,
           'onclick' => "",
           'onchange' => "",
           'value'  => '1',
           'disabled' => false,
-          'tabindex' => 1
+          'tabindex' => 1,
+          'value'=> $metadata->getProdCat(),
         ));
         $fieldset->addField('prod_childcat', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to a products in current category and children categories'),
           'name'      => 'prod_childcat',
-          'checked' => false,
+        //  'checked' => false,
           'onclick' => "",
           'onchange' => "",
           'value'  => '1',
           'disabled' => false,
-          'tabindex' => 1
+          'tabindex' => 1,
+          'value'=> $metadata->getProdChildcat(),
         ));
          $fieldset->addField('prod_form', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to a products in text field'),
           'name'      => 'prod_form',
-          'checked' => false,
+         // 'checked' => false,
           'onclick' => "",
           'onchange' => "",
-          'value'  => '1',
+          'value'  => $metadata->getProdForm(),
           'disabled' => false,
-          'tabindex' => 1
+          'tabindex' => 1,
         ));
          
         $fieldset->addField('keywords', 'textarea', array(
@@ -142,6 +149,7 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
              'class'     => 'keywords',
              'required'  => true,
              'name'      => 'keywords',
+             'value'     => $metadata->getKeywords(),
         ));
 //       
 //     $fieldset->addField('cat_select', 'select', array(
@@ -161,6 +169,7 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
              'required'  => false,
              'name'      => 'products',
              'note'     => Mage::helper('metadata')->__('Enter products id here'),
+             'value'   => $metadata->getProducts(),
         ));
         
      $fieldset->addField('categories', 'text', array(
@@ -169,6 +178,7 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
              'required'  => false,
              'name'      => 'categories',
              'note'     => Mage::helper('metadata')->__('Enter categories id here'),
+             'value'   => $metadata->getCategories(),
         ));
      
       
