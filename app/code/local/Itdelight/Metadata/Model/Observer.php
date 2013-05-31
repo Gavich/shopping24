@@ -148,15 +148,14 @@ class Itdelight_Metadata_Model_Observer {
     public function generateNewMetadata($product,$custom){
          $page=Mage::getSingleton('core/session')->getPage($page);
         $array=explode("<e>",$custom);
-        Mage::Log($array,null,'uu.log');
   //      $count=substr_count($custom,"<e>");
         $count=count($array);
         if(($page>$count)&($count>0)){
             $new_index=$page % $count;
-            $new_data=$array[$new_index];
+            $new_data=$product.' '.$array[$new_index-1];
         }else{
             $new_data=$product.' '.$array[--$page];
-       Mage::Log($new_data,null,'new_data.log');
+
             
         }
 
