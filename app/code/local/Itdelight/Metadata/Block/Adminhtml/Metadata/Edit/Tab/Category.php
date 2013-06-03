@@ -9,6 +9,14 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Edit_Tab_Category extends Mage
         $this->setTitle(Mage::helper('metadata')->__('Metadata Information'));
        
     }
+    
+    public function checkedFlags($value){
+        if($value==1){
+            return true;
+        }
+        else {return false;}
+    }
+    
     public function getCategoriesArray() {
 
     $categoriesArray = Mage::getModel('catalog/category')
@@ -80,66 +88,63 @@ $metadata=Mage::registry('current_metadata');
  $fieldset->addField('cat', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to checked category'),
           'name'      => 'cat',
-        //  'checked' => false,
+          'checked' => $this->checkedFlags($metadata->getCat()),
           'onclick' => "",
           'onchange' => "",
           'value'  => '1',
           'disabled' => false,
           'tabindex' => 1,
-          'value'=> $metadata->getCat(),
+
         ));
   
   $fieldset->addField('cat_child', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to checked category and children'),
           'name'      => 'cat_child',
-       //   'checked' => false,
-          'onclick' => "",
-          'onchange' => "",
-          'value'  => '1',
+          'checked' =>  $this->checkedFlags($metadata->getCatChild()),
+          'onclick' => "1",
+          'onchange' => "1",
+          'value'  => "1",
           'disabled' => false,
           'tabindex' => 1,
-          'value'=> $metadata->getCatChild(),
         ));
        $fieldset->addField('cat_form', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to categories in form'),
           'name'      => 'cat_form',
-     //     'checked' => false,
+          'checked' => $this->checkedFlags($metadata->getCatForm()),
           'onclick' => "",
           'onchange' => "",
-          'value'  => '1',
+          'value'  => "1",
           'disabled' => false,
           'tabindex' => 1,
-           'value'=> $metadata->getCatForm(),
+
         ));
        $fieldset->addField('prod_cat', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to a products in current category'),
           'name'      => 'prod_cat',
-       //   'checked' => false,
+          'checked' => $this->checkedFlags($metadata->getProdCat()),
           'onclick' => "",
           'onchange' => "",
-          'value'  => '1',
+          'value'  => "1",
           'disabled' => false,
           'tabindex' => 1,
-          'value'=> $metadata->getProdCat(),
         ));
         $fieldset->addField('prod_childcat', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to a products in current category and children categories'),
           'name'      => 'prod_childcat',
-        //  'checked' => false,
+          'checked' => $this->checkedFlags($metadata->getProdChildcat()),
           'onclick' => "",
           'onchange' => "",
-          'value'  => '1',
+          'value'  => "1",
           'disabled' => false,
           'tabindex' => 1,
-          'value'=> $metadata->getProdChildcat(),
         ));
          $fieldset->addField('prod_form', 'checkbox', array(
           'label'     => Mage::helper('metadata')->__('Apply to a products in text field'),
           'name'      => 'prod_form',
-         // 'checked' => false,
+          'checked' => $this->checkedFlags($metadata->getProdForm()),
           'onclick' => "",
           'onchange' => "",
-          'value'  => $metadata->getProdForm(),
+          'value'  => true,
           'disabled' => false,
           'tabindex' => 1,
         ));

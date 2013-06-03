@@ -24,7 +24,7 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
                 $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
                 if ($data) {
                     $model->setData($data)->setId($id);
-                   
+                   $this->_redirect('*/*/');
                 }
             } else {
                 Mage::getSingleton('adminhtml/session')->addError(Mage::helper('metadata')->__('Metadata does not exist'));
@@ -41,6 +41,7 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
           $block->setStoreId($model->getStoreId());
        }
         $this->renderLayout();
+        
     }
        public function categoriesAction()
     {

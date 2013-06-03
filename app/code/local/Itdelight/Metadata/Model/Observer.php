@@ -35,10 +35,11 @@ class Itdelight_Metadata_Model_Observer {
     public function patternProductFunction($text_field,$product){
         
         $categories=$product->getCategoryIds();
+        Mage::Log($categories,null,'my.log');
        foreach($categories as $category){
-           $object_category=Mage::getModel('catalog/product')->load($category);
+           $object_category=Mage::getModel('catalog/category')->load($category);
             $text_field=str_replace("<category>", $object_category->getName(), $text_field);
-        }
+       }
         $text_field=str_replace("<product>", $product->getName(), $text_field);
         $text_field=str_replace("<price>", $product->getPrice(), $text_field);
         return  $text_field;
@@ -110,9 +111,12 @@ class Itdelight_Metadata_Model_Observer {
                 $category=Mage::getModel('catalog/category')->load($item);
                 $parents=$category->getParentIds();
                foreach($parents as $parent){
-               if(($model->getCategoryId()==$item)OR($model->getCategoryId()==$parent)){
+               if($model->getCategoryId()==$parent){
                 $this->setProductMetadata($product,$model); 
             }
+               }
+               if($model->getCategoryId()==$item){
+                   $this->setProductMetadata($product,$model);
                }
             }
             
@@ -121,12 +125,20 @@ class Itdelight_Metadata_Model_Observer {
     public function generateForProductsOfCat($product,$model){
          
         if($model->getProdCat()){
+            
             $categories=$product->getCategoryIds();
-            foreach($categories as $item){
-               if($model->getCategoryId()==$item){
-                $this->setProductMetadata($product,$model); 
+            foreach ($categories as $category){
+                if($category==$model->getCategoryId())
+                {
+                    $this->setProductMetadata($product,$model);
+                }
             }
-            }
+//            foreach($categories as $item){
+//               if($model->getCategoryId()==$item){
+//                $this->setProductMetadata($product,$model); 
+//            return true;              
+          //  }
+          //  }
             
         }
     }
@@ -154,16 +166,14 @@ class Itdelight_Metadata_Model_Observer {
             $new_index=$page % $count;
             $new_data=$array[$new_index-1];
         }else{
-            $new_data=$array[$page-1];
-
-            
+            $new_data=$array[$page-1];           
         }
+        $new_data=$product.$new_data;
         return $new_data;
     }
     
     public function setProductMetadata($product,$model){
         
-        $page=Mage::getSingleton('core/session')->getPage($page);
         $custom_keywords=$this->patternProductFunction($model->getKeywords(),$product);
         $custom_description=$this->patternProductFunction($model->getDescription(),$product);
         $custom_title=$this->patternProductFunction($model->getTitle(),$product);
@@ -180,7 +190,7 @@ class Itdelight_Metadata_Model_Observer {
     }
     
      public function setCategoryMetadata($category,$model){
-         Mage::Log('Hello',null,'nnn.log');
+        
         $custom_keywords=$this->patternCatalogFunction($model->getKeywords(),$category);
         $custom_description=$this->patternCatalogFunction($model->getDescription(),$category);
         $custom_title=$this->patternCatalogFunction($model->getTitle(),$category);
@@ -205,10 +215,9 @@ class Itdelight_Metadata_Model_Observer {
         $page=Mage::getSingleton('core/session')->getPage($page);
         foreach ($customCollection as $custom)
    {        
-            $var=$this->getCategory1($custom);
-            Mage::Log($var,null,'var.log');
-            $custom->setCategoryId($var);
-            $custom->save();
+           // $var=$this->getCategory1($custom);
+            //$custom->setCategoryId($var);
+            //$custom->save();
             $this->generateForProductsOfCat($product,$custom);
             $this->generateForProductsOfCatandChild($product,$custom);
             $this->applyToProductsOfField($product,$custom);

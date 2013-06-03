@@ -52,7 +52,7 @@ class Mage_Adminhtml_Block_Catalog_Product_Edit_Tab_Categories extends Mage_Admi
      */
     public function getProduct()
     {
-        return Mage::registry('current_product');
+        return Mage::registry('current_metadata');
     }
 
     /**
