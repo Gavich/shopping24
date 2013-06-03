@@ -42,6 +42,7 @@ class Itdelight_Metadata_Model_Observer {
        }
         $text_field=str_replace("<product>", $product->getName(), $text_field);
         $text_field=str_replace("<price>", $product->getPrice(), $text_field);
+        $text_field=str_replace("<brand>",$product->getBrandLogo(),$text_field);
         return  $text_field;
       }
       
