@@ -72,7 +72,7 @@ $metadata=Mage::registry('current_metadata');
         $fieldset->addField('title', 'text', array(
              'label'     => Mage::helper('metadata')->__('Title'),
              'class'     => 'title',
-             'required'  => true,
+             'required'  => false,
              'name'      => 'title',
              'value'     => $metadata->getTitle(),
 //             'note'     => Mage::helper('metadata')->__('The title'),
@@ -81,7 +81,7 @@ $metadata=Mage::registry('current_metadata');
         $fieldset->addField('description', 'textarea', array(
              'label'     => Mage::helper('metadata')->__('Description'),
              'class'     => 'description',
-             'required'  => true,
+             'required'  => false,
              'name'      => 'description',
              'value'     => $metadata->getDescription(),
         ));
@@ -152,7 +152,7 @@ $metadata=Mage::registry('current_metadata');
         $fieldset->addField('keywords', 'textarea', array(
              'label'     => Mage::helper('metadata')->__('Keywords'),
              'class'     => 'keywords',
-             'required'  => true,
+             'required'  => false,
              'name'      => 'keywords',
              'value'     => $metadata->getKeywords(),
         ));
