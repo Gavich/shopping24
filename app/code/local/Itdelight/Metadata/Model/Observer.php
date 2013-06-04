@@ -134,12 +134,6 @@ class Itdelight_Metadata_Model_Observer {
                     $this->setProductMetadata($product,$model);
                 }
             }
-//            foreach($categories as $item){
-//               if($model->getCategoryId()==$item){
-//                $this->setProductMetadata($product,$model); 
-//            return true;              
-          //  }
-          //  }
             
         }
     }
@@ -151,7 +145,7 @@ class Itdelight_Metadata_Model_Observer {
             $new_index=$page % $count;
             $new_data=$array[$new_index];
         }else{
-            $new_data=$product.' '.$array[$page-1];
+            $new_data=$array[$page-1];
        
             
         }
@@ -161,7 +155,6 @@ class Itdelight_Metadata_Model_Observer {
     public function generateNewMetadata($product,$custom){
          $page=Mage::getSingleton('core/session')->getPage($page);
         $array=explode("<e>",$custom);
-  //      $count=substr_count($custom,"<e>");
         $count=count($array);
         if(($page>$count)&($count>0)){
             $new_index=$page % $count;
@@ -169,7 +162,7 @@ class Itdelight_Metadata_Model_Observer {
         }else{
             $new_data=$array[$page-1];           
         }
-        $new_data=$product.$new_data;
+        $new_data=$new_data;
         return $new_data;
     }
     
@@ -215,15 +208,11 @@ class Itdelight_Metadata_Model_Observer {
         $customCollection=$customModel->getCollection();
         $page=Mage::getSingleton('core/session')->getPage($page);
         foreach ($customCollection as $custom)
-   {        
-           // $var=$this->getCategory1($custom);
-            //$custom->setCategoryId($var);
-            //$custom->save();
+        {        
             $this->generateForProductsOfCat($product,$custom);
             $this->generateForProductsOfCatandChild($product,$custom);
-            $this->applyToProductsOfField($product,$custom);
-             
-   }
+            $this->applyToProductsOfField($product,$custom);             
+        }
  
   
   }
@@ -242,7 +231,6 @@ class Itdelight_Metadata_Model_Observer {
      $custom_collection=$custom_model->getCollection();     
         foreach($custom_collection as $item){
         $var=$this->getCategory1($item);
-        Mage::Log($var,null,'var.log');
         $item->setCategoryId($var);
         $item->save();
          $this->applyToCategory($category,$item);
