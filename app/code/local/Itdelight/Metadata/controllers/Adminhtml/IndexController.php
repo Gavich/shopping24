@@ -9,6 +9,7 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
         $this->renderLayout();
         
    }
+   
      public function editAction()
     {
         
@@ -16,15 +17,14 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
         $id = $this->getRequest()->getParam('id', null);
         
         $model = Mage::getModel('metadata/metadata');
-        Mage::register('current_metadata', $model);
-
         if ($id) {
             $model->load((int) $id);
+            Mage::register('current_metadata', $model);
             if ($model->getId()) {
                 $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
                 if ($data) {
                     $model->setData($data)->setId($id);
-                   
+                   $this->_redirect('*/*/');
                 }
             } else {
                 Mage::getSingleton('adminhtml/session')->addError(Mage::helper('metadata')->__('Metadata does not exist'));
@@ -41,7 +41,7 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
           $block->setStoreId($model->getStoreId());
        }
         $this->renderLayout();
-
+        
     }
        public function categoriesAction()
     {
@@ -174,6 +174,16 @@ class Itdelight_Metadata_Adminhtml_IndexController extends Mage_Adminhtml_Contro
             }
         }
         $this->_redirect('*/*/index');
+    }
+    public function gridOnlyAction()
+    {
+
+        $this->loadLayout();
+        $this->getResponse()->setBody(
+            $this->getLayout()
+                ->createBlock('metadata/adminhtml_metadata_grid')
+                ->toHtml()
+        );
     }
 
 }

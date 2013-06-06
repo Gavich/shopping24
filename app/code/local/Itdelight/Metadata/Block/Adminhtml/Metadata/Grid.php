@@ -83,7 +83,7 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Grid extends Mage_Adminhtml_Bl
                             'base'=>'*/*/edit',
                             'params'=>array('store'=>$this->getRequest()->getParam('store'))
                         ),
-                        'field'   => 'metadata_id'
+                        'field'   => 'id'
                     )
                 ),
                 'filter'    => false,
@@ -122,6 +122,10 @@ class Itdelight_Metadata_Block_Adminhtml_Metadata_Grid extends Mage_Adminhtml_Bl
         ));
       
         return $this;
+    }
+        public function getGridUrl()
+    {
+        return $this->getUrl('*/*/gridonly', array('_current'=>true));
     }
     
     public function getRowUrl($row)

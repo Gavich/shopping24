@@ -10,7 +10,6 @@ class Itdelight_Metadata_Model_Observer {
         $string=$model->getCategoryIds();
         $arr=explode(',',$string);
         $var=$arr[1];
-Mage::Log($var,null,'cat.log');
         return $var;
     }
     public function patternCatalogFunction($text_field,$category){
@@ -36,12 +35,14 @@ Mage::Log($var,null,'cat.log');
     public function patternProductFunction($text_field,$product){
         
         $categories=$product->getCategoryIds();
+        Mage::Log($categories,null,'my.log');
        foreach($categories as $category){
-           $object_category=Mage::getModel('catalog/product')->load($category);
+           $object_category=Mage::getModel('catalog/category')->load($category);
             $text_field=str_replace("<category>", $object_category->getName(), $text_field);
-        }
+       }
         $text_field=str_replace("<product>", $product->getName(), $text_field);
         $text_field=str_replace("<price>", $product->getPrice(), $text_field);
+        $text_field=str_replace("<brand>",$product->getBrandLogo(),$text_field);
         return  $text_field;
       }
       
@@ -64,19 +65,22 @@ Mage::Log($var,null,'cat.log');
         }
     public function applyToCategoryAndChild($category,$model){
             if($model->getCatChild()){
-                $parents=$category->getParentIds();              
+                $parents=$category->getParentIds();
+               
                 foreach($parents as $parent){
-                if(($model->getCategoryId()==$category->getId())OR($model->getCategoryId()==$parent)){                    
+                if($model->getCategoryId()==$parent){                    
+                    $this->setCategoryMetadata($category,$model); 
+                }      
+            }
+              if($model->getCategoryId()==$category->getId()){
                     $this->setCategoryMetadata($category,$model);
                 }
-            }
             }
         }
     
         public function applyToCategory($category,$model){
             if($model->getCat()){
-              Mage::Log($model->getCategoryId(),null,'sasa.log');
-                if($model->getCategoryId()==$category->getId()){
+                  if($model->getCategoryId()==$category->getId()){
                     $this->setCategoryMetadata($category,$model);
                 }
             }
@@ -108,9 +112,12 @@ Mage::Log($var,null,'cat.log');
                 $category=Mage::getModel('catalog/category')->load($item);
                 $parents=$category->getParentIds();
                foreach($parents as $parent){
-               if(($model->getCategoryId()==$item)OR($model->getCategoryId()==$parent)){
+               if($model->getCategoryId()==$parent){
                 $this->setProductMetadata($product,$model); 
             }
+               }
+               if($model->getCategoryId()==$item){
+                   $this->setProductMetadata($product,$model);
                }
             }
             
@@ -119,11 +126,13 @@ Mage::Log($var,null,'cat.log');
     public function generateForProductsOfCat($product,$model){
          
         if($model->getProdCat()){
+            
             $categories=$product->getCategoryIds();
-            foreach($categories as $item){
-               if($model->getCategoryId()==$item){
-                $this->setProductMetadata($product,$model); 
-            }
+            foreach ($categories as $category){
+                if($category==$model->getCategoryId())
+                {
+                    $this->setProductMetadata($product,$model);
+                }
             }
             
         }
@@ -136,7 +145,7 @@ Mage::Log($var,null,'cat.log');
             $new_index=$page % $count;
             $new_data=$array[$new_index];
         }else{
-            $new_data=$product.' '.$array[$page-1];
+            $new_data=$array[$page-1];
        
             
         }
@@ -146,22 +155,19 @@ Mage::Log($var,null,'cat.log');
     public function generateNewMetadata($product,$custom){
          $page=Mage::getSingleton('core/session')->getPage($page);
         $array=explode("<e>",$custom);
-        $count=substr_count($custom,"<e>");
+        $count=count($array);
         if(($page>$count)&($count>0)){
             $new_index=$page % $count;
-            $new_data=$array[$new_index];
+            $new_data=$array[$new_index-1];
         }else{
-            $new_data=$product.' '.$array[$page-1];
-       
-            
+            $new_data=$array[$page-1];           
         }
-        
+        $new_data=$new_data;
         return $new_data;
     }
     
     public function setProductMetadata($product,$model){
         
-        $page=Mage::getSingleton('core/session')->getPage($page);
         $custom_keywords=$this->patternProductFunction($model->getKeywords(),$product);
         $custom_description=$this->patternProductFunction($model->getDescription(),$product);
         $custom_title=$this->patternProductFunction($model->getTitle(),$product);
@@ -178,6 +184,7 @@ Mage::Log($var,null,'cat.log');
     }
     
      public function setCategoryMetadata($category,$model){
+        
         $custom_keywords=$this->patternCatalogFunction($model->getKeywords(),$category);
         $custom_description=$this->patternCatalogFunction($model->getDescription(),$category);
         $custom_title=$this->patternCatalogFunction($model->getTitle(),$category);
@@ -201,16 +208,11 @@ Mage::Log($var,null,'cat.log');
         $customCollection=$customModel->getCollection();
         $page=Mage::getSingleton('core/session')->getPage($page);
         foreach ($customCollection as $custom)
-   {        
-            $var=$this->getCategory1($custom);
-            Mage::Log($var,null,'var.log');
-            $custom->setCategoryId($var);
-            $custom->save();
+        {        
             $this->generateForProductsOfCat($product,$custom);
             $this->generateForProductsOfCatandChild($product,$custom);
-            $this->applyToProductsOfField($product,$custom);
-             
-   }
+            $this->applyToProductsOfField($product,$custom);             
+        }
  
   
   }
@@ -229,7 +231,6 @@ Mage::Log($var,null,'cat.log');
      $custom_collection=$custom_model->getCollection();     
         foreach($custom_collection as $item){
         $var=$this->getCategory1($item);
-        Mage::Log($var,null,'var.log');
         $item->setCategoryId($var);
         $item->save();
          $this->applyToCategory($category,$item);
