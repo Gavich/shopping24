@@ -30,10 +30,10 @@
     <div class="breadcrumbs">
         <ul>
             <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
-                <li class="<?php echo $_crumbName ?> <?php if($_crumbInfo['last']){echo 'last';} ?>" itemprop="breadcrumb" itemscope itemtype="http://schema.org/Breadcrumb">
+                <li class="<?php echo $_crumbName ?> <?php if($_crumbInfo['last']){echo 'last';} ?>" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
                     <?php if($_crumbInfo['link'] && !$_crumbInfo['last']): ?>
                         <a itemprop="url" href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>">
-                            <span itemprop="name">
+                            <span itemprop="title">
                                 <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
                             </span>
                         </a>
@@ -52,7 +52,7 @@
                             </ul>
                         <?php endif; ?>
                     <?php elseif($_crumbInfo['last']): ?>
-                        <strong itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
+                        <strong itemprop="title"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
                         <link itemprop="url" href="<?php echo $_crumbInfo['link'] ?>"/>
                     <?php else: ?>
                         <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
