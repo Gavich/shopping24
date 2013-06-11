@@ -21,5 +21,12 @@
             <active>true</active>
             <codePool>local</codePool>
         </TC_Perfomance>
+        <TC_Breadcrumbs>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Catalog/>
+            </depends>
+        </TC_Breadcrumbs>
     </modules>
 </config>
