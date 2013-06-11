@@ -24,24 +24,44 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<?php $isCatalogPage = $this->isCatalogPage();?>
+
 <?php if($crumbs && is_array($crumbs)): ?>
-<div class="breadcrumbs">
-    <ul>
-        <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
-			
-            <li class="<?php echo $_crumbName ?> <?php if($_crumbInfo['last']){echo 'last';} ?>">
-            <?php if($_crumbInfo['link']): ?>
-                <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
-            <?php elseif($_crumbInfo['last']): ?>
-                <strong><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
-            <?php else: ?>
-                <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
-            <?php endif; ?>
-            <?php if(!$_crumbInfo['last']): ?>
-                <span>&nbsp;</span>
-            <?php endif; ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</div>
+    <div class="breadcrumbs">
+        <ul>
+            <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+                <li class="<?php echo $_crumbName ?> <?php if($_crumbInfo['last']){echo 'last';} ?>" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <?php if($_crumbInfo['link'] && !$_crumbInfo['last']): ?>
+                        <a itemprop="url" href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>">
+                            <span itemprop="title">
+                                <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
+                            </span>
+                        </a>
+
+                        <?php if ($isCatalogPage && $_crumbInfo['level']): ?>
+                            <?php $siblings = $this->getSiblingCategories($_crumbInfo['level']);?>
+
+                            <ul class="sibling-categories">
+                                <?php foreach($siblings as $category): ?>
+                                    <?php if ($category->getId() != $_crumbInfo['id']): ?>
+                                        <li>
+                                            <a href="<?php echo $category->getUrl() ?>" title="<?php echo $this->htmlEscape($category->getName()) ?>"><?php echo $this->htmlEscape($category->getName()) ?></a>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    <?php elseif($_crumbInfo['last']): ?>
+                        <strong itemprop="title"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
+                        <link itemprop="url" href="<?php echo $_crumbInfo['link'] ?>"/>
+                    <?php else: ?>
+                        <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
+                    <?php endif; ?>
+                    <?php if(!$_crumbInfo['last']): ?>
+                        <span class="separator">&nbsp;</span>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 <?php endif; ?>
