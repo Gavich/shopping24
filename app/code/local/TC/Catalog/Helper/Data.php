@@ -78,22 +78,12 @@ class TC_Catalog_Helper_Data
                 // add category path breadcrumb
                 foreach ($pathIds as $categoryId){
                     if (isset($categories[$categoryId]) && $categories[$categoryId]->getName()){
-
-
-                        $category = Mage::getModel('catalog/category')->load($categoryId);
-                        if ($category->getDisableLink()) {
-                            $path['category' . $categoryId] = array(
-                                'label' => $categories[$categoryId]->getName(),
-                                'link'  => '',
-                            );
-                        } else {
-                            $path['category' . $categoryId] = array(
-                                'label' => $categories[$categoryId]->getName(),
-                                'link'  => $this->_isCategoryLink($categoryId) ? $categories[$categoryId]->getUrl() : '',
-                            );
-                        }
-
-
+                        $path['category' . $categoryId] = array(
+                            'label' => $categories[$categoryId]->getName(),
+                            'link'  => $categories[$categoryId]->getUrl(),
+                            'level' => $categories[$categoryId]->getLevel(),
+                            'id'    => $categories[$categoryId]->getId()
+                        );
                     }
                 }
             }
