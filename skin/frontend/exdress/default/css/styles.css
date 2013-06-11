@@ -903,6 +903,7 @@ p.required{
 }
 .breadcrumbs li{
 	display:inline;
+    position: relative;
 }
 .breadcrumbs li strong, .breadcrumbs li a{
 	font-weight:bold;
@@ -914,6 +915,55 @@ p.required{
 	display:inline-block;
 	padding:0 8px;
 }
+.breadcrumbs li a:after {
+    content: none;
+}
+
+.breadcrumbs li:hover .sibling-categories {
+    display: block;
+}
+.sibling-categories {
+    position: absolute;
+    top: 90%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    background-color: white;
+    border: 1px solid #CCC;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+.sibling-categories:hover {
+    display: block;
+}
+.sibling-categories li {
+    line-height: 20px;
+}
+.sibling-categories li a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 20px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.sibling-categories li a:hover {
+    text-decoration: none;
+    background-color: #fafafa;
+}
+
 /* Page Heading */
 .page-title,
 .catalog-product-view .product-view .product-name,
