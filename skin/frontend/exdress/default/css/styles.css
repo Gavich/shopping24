@@ -910,7 +910,7 @@ p.required{
 	color:#666;
 	text-transform:lowercase;
 }
-.breadcrumbs li span{
+.breadcrumbs li span.separator{
 	background:url(../images/cdd_breadcrumb.png) center center no-repeat;
 	display:inline-block;
 	padding:0 8px;
