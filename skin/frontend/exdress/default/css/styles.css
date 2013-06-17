@@ -5349,6 +5349,7 @@ a.link-produktinfo:hover{
 	color:#666;
 }
 .col-main .ui-tabs .ui-tabs-panel{
+    padding-top: 20px;
 	background:none;
 	border-width:0;
 	display:block;
