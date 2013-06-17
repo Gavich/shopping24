@@ -94,10 +94,12 @@
                 <h1>
                     <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
                 </h1>
-                <?php echo $this->getReviewsSummaryHtml($_product, false, true) ?>
-                <?php if ($this->getReviewsSummaryHtml($_product, false, false) != ""):?>
-                    <div class="review-summary">(<?php echo Mage::helper('reviews_summary')->getReviewsCount($this); ?>)</div>
-                <?php endif; ?>
+                <div class="rating-wrapper">
+                    <?php echo $this->getReviewsSummaryHtml($_product, false, true) ?>
+                    <?php if (Mage::helper('reviews_summary')->getReviewsCount($this) > 0):?>
+                        <div class="review-summary">(<?php echo Mage::helper('reviews_summary')->getReviewsCount($this); ?>)</div>
+                    <?php endif; ?>
+                </div>
 
 
                 <?php if ($_product->getShortDescription()):?>

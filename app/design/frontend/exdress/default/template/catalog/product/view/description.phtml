@@ -36,7 +36,6 @@
     <!--<h2><?php echo $this->__('Product Detailed Info') ?></h2>-->
     </div>
     <div class="std">
-        <h2><?php echo $this->__('Описание товара ');?><?php echo $this->getProduct()->getName(); ?></h2>
         <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_description, 'description') ?>
     </div>
 <?php endif; ?>
