@@ -17,7 +17,7 @@
 ?>
 <?php if($_additional = $this->getAdditionalData()): ?>
     <table class="data-table" id="product-attribute-specs-table">
-        <h2><?php echo $this->__('Описание товара ');?><?php echo $this->getProduct()->getName(); ?></h2>
+        <h2><?php echo $this->__('Описание товара'); ?> <?php echo $_product->getName(); ?></h2>
         <tbody>
         <?php foreach ($_additional as $_data): ?>
             <?php if ($_data['value'] == 'N/A') continue ?>
