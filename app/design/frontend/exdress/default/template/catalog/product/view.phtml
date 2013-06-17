@@ -92,7 +92,7 @@
                     }
                 ?>
                 <h1>
-                    <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                    <?php echo $_helper->productAttribute($_product, $_product->getMetaTitle(), 'meta_title') ?>
                 </h1>
                 <div class="rating-wrapper">
                     <?php echo $this->getReviewsSummaryHtml($_product, false, true) ?>
@@ -114,9 +114,6 @@
                 </div>
                 <?php endif;?>
 
-                <div class="std">
-                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('services_product')->toHtml() ?>
-                </div>
                 <?php if($hasBrand): ?>
                     <div class="product-brand-logo">
                         Бренд (производитель):
@@ -128,6 +125,9 @@
                     Бренд (производитель): <?php echo $this->escapeHtml($_product->getBrandLogo());?>
                     </div>
                 <?php endif;?>
+                <div class="std">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('services_product')->toHtml() ?>
+                </div>
             </div>
 
        
