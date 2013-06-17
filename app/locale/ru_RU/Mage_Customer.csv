@@ -170,7 +170,7 @@
 "Log In","Войти"
 "Log in or Create an Account","Войдите или создайте учётную запись"
 "Log Out","Выйти"
-"Login","Логин"
+"Login","Войти"
 "Login and password are required","Необходимо указать адрес электронной почты (email) и пароль"
 "Login Information","Информация для авторизации"
 "Login Options","Параметры авторизации"
@@ -411,3 +411,4 @@
 "Zip/Postal Code","Почтовый индекс"
 "ZIP/Postal Code","Почтовый индекс"
 "My account navigation","Навигация по аккаунту"
+"Login or Register","Войти или зарегистироватся"

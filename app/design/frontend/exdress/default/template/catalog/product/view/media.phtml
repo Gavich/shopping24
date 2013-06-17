@@ -24,6 +24,7 @@
 <?php if (count($this->getGalleryImages()) > 0): ?>
 <div class="more-views">
     <div class="hint"><?php echo $this->__('+&nbsp;Rollover Image to zoom in') ?></div>
+    <h2><?php echo $this->__('Фотографии товара '); ?><?php echo Mage::registry('product')->getName(); ?></h2>
     <ul>
     <?php
         $galleryImages = '';

@@ -56,3 +56,5 @@
 "Your Language","Ваш язык"
 "Your Language:","Ваш язык:"
 "Entire Shop...","По всему магазину"
+"<a href=""%s"" class=""top-link-cart"" id=""topcartlink"">Shopping Cart %s Item(s) %s </a>","<a href=""%s"" class=""top-link-cart"" id=""topcartlink"">В корзине %s товар(ов) %s </a>"
+"<a %s class=""top-link-cart"" id=""topcartlink"">Shopping Cart %s Item(s) %s </a>","<a %s class=""top-link-cart"" id=""topcartlink"">В корзине %s товар(ов) %s </a>"

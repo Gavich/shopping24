@@ -32,12 +32,16 @@
         <?php endif; ?>
 
         <?php echo $this->getChildHtml('addto') ?>
+        <script type="text/javascript" src="//yandex.st/share/share.js"
+                charset="utf-8"></script>
+        <div class="yashare-auto-init" data-yashareL10n="ru"
+             data-yashareType="none" data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir"
 
+            ></div>
         <?php if ($this->canEmailToFriend()): ?>
         <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
         <?php endif; ?>
 
-        <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
     </div>
 
     <div class="product-essential">
@@ -50,14 +54,6 @@
                 <?php echo $this->getChildHtml('media') ?>
             </div>
             <div class="product-shop">
-                <p class="availability article"><?php echo $this->__('Product-Name:') ?> <span><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></span></p>
-                <p class="availability sku"><?php echo $this->__('Produkt-ID:') ?> <span><?php echo $_product->getSku(); ?></span></p>
-                <?php /*<p class="availability manufacturer"><?php echo $this->__('Manufacturer:') ?> <span><?php echo $_product->getAttributeText('manufacturer') ?></span></p>*/?>
-                <?php if($_product->isSaleable()): ?>
-                    <p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
-                <?php else: ?>
-                    <p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
-                <?php endif; ?>
                 <?php echo $this->getChildHtml('alert_urls') ?>
                 <?php //echo $this->getChildHtml('product_type_data') ?>
                 <?php echo $this->getTierPriceHtml() ?>
@@ -78,9 +74,9 @@
                 <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                     <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
                 <?php endif;?>
-                <p class="availability" id="availability-code">
-                    <?php echo $this->__('Availability code')?>: <span></span>
-                </p>
+<!--                <p class="availability" id="availability-code">-->
+<!--                    --><?php //echo $this->__('Availability code')?><!--: <span></span>-->
+<!--                </p>-->
             </div>
 
             <div class="short-description">
@@ -95,17 +91,16 @@
                         }
                     }
                 ?>
-                <h2 <?php echo ($hasBrand) ? 'style="width:220px"' : '' ?>>
-                    <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
-                </h2>
-
-                <?php if($hasBrand): ?>
-                <div class="product-brand-logo">
-                    <a href="<?php echo ($brandURL) ? $brandURL : 'javascript:return false;' ?>">
-                        <img src="<?php echo $hasBrand ?>" alt="<?php echo $brandFileName ?>" />
-                    </a>
+                <h1>
+                    <?php echo $_helper->productAttribute($_product, $_product->getMetaTitle(), 'meta_title') ?>
+                </h1>
+                <div class="rating-wrapper">
+                    <?php echo $this->getReviewsSummaryHtml($_product, false, true) ?>
+                    <?php if (Mage::helper('reviews_summary')->getReviewsCount($this) > 0):?>
+                        <div class="review-summary">(<?php echo Mage::helper('reviews_summary')->getReviewsCount($this); ?>)</div>
+                    <?php endif; ?>
                 </div>
-                <?php endif ?>
+
 
                 <?php if ($_product->getShortDescription()):?>
                 <div class="std">
@@ -118,7 +113,16 @@
                     <?php echo $_helper->productAttribute($_product, nl2br($_product->getDescrQuality()), 'description_quality') ?>
                 </div>
                 <?php endif;?>
-
+                    <?php if($hasBrand): ?>
+                        <div class="product-brand-logo">
+                            Бренд (производитель):
+                            <a href="<?php echo ($brandURL) ? $brandURL : 'javascript:return false;' ?>">
+                                <img src="<?php echo $hasBrand ?>" alt="<?php echo $brandFileName ?>" />
+                            </a>
+                        </div>
+                    <?php elseif ($_product->getBrandLogo() != null && $_product->getBrandLogo() != ''):?>
+                        <div class="std">Бренд (производитель): <?php echo $this->escapeHtml($_product->getBrandLogo());?></div>
+                    <?php endif;?>
                 <div class="std">
                     <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('services_product')->toHtml() ?>
                 </div>
