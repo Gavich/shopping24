@@ -88,8 +88,19 @@ var checkQuantity = function(){
 
         if (currentProduct === false) execOutOfStock();
         if (typeof currentProduct['availability'] != undefined && currentProduct['availability']) execInStock(); else execOutOfStock();
-
-        jQuery('div.price-box span.price').html(currentProduct['price']+' грн.');
+        var currentPrice = currentProduct['price'];
+        if (currentProduct['price'] == 'undefined ' || typeof currentProduct['price'] == 'undefined') {
+            currentPrice = 'Нет данных';
+        } else {
+            currentPrice += ' грн.';
+        }
+        jQuery('div.price-box span.price').html(currentPrice);
+//        if (currentProduct['price'] == 'undefined'){
+//            currentProduct['price'] = 'Нет данных'
+//            jQuery('div.price-box span.price').html(currentProduct['price']);
+//        } else {
+//            jQuery('div.price-box span.price').html(currentProduct['price']+' грн.');
+//        }
 
         if (typeof currentProduct['availabilityCode'] != undefined && currentProduct['availabilityCode']){
             var message = currentProduct['availabilityCode'];

@@ -3759,9 +3759,14 @@ tr.summary-details-excluded{
 .catalog-product-view .ratings{
 	margin-top:2px;
 	position:absolute;
-	right:280px;
+	left:450px;
 	white-space:nowrap;
 	width:195px;
+}
+
+.review-summary {
+    margin-left:350px;
+    position:absolute;
 }
 .ratings{
 	line-height:1.25;
@@ -3848,11 +3853,11 @@ tr.summary-details-excluded{
 	line-height:18px;
 }
 .availability.in-stock{
-	border-bottom:1px solid #E5E5E5;
+	/*border-bottom:1px solid #E5E5E5;*/
 	padding:2px 10px 2px 15px;
 }
 .availability.out-of-stock{
-	border-bottom:1px solid #E5E5E5;
+	/*border-bottom:1px solid #E5E5E5;*/
 	margin-right:20px;
 }
 .availability.in-stock span{
@@ -3903,13 +3908,14 @@ tr.summary-details-excluded{
 	font-weight:bold;
 }
 .product-view .product-shop .availability{
-	background:none repeat scroll 0 0 #FFFFFF;
-	border-left:1px solid #E5E5E5;
-	border-right:1px solid #E5E5E5;
-	border-top:1px solid #E5E5E5;
-	color:#666;
-	margin:0 10px 0 15px;
-	padding:4px 4px 4px 8px;
+	/*background:none repeat scroll 0 0 #FFFFFF;*/
+	/*border-left:1px solid #E5E5E5;*/
+	/*border-right:1px solid #E5E5E5;*/
+	/*border-top:1px solid #E5E5E5;*/
+	color:#FF8A00;
+    font-weight: bold;
+	margin:0px;
+	padding:0px;
 }
 .catalog-product-view .product-view .product-shop .add-to-box{
 	border-top:3px solid #FFFFFF;
@@ -3917,14 +3923,13 @@ tr.summary-details-excluded{
 	overflow:hidden;
 }
 .catalog-product-view .product-view .product-shop .simple-price-box{
-	border-top:3px solid #FFFFFF;
-	padding-top:10px;
+	/*border-top:3px solid #FFFFFF;*/
+	/*padding-top:10px;*/
 	overflow:hidden;
 }
 .product-view .product-shop .availability span{
-	font-weight:normal;
-	color:#999;
-	padding-left:5px;
+    color:#FF8A00;
+    font-weight: bold;
 }
 
 /* SocialShare */
@@ -3980,7 +3985,7 @@ tr.summary-details-excluded{
 	line-height:16px;
 }
 .product-view .product-shop .price-box{
-	margin:10px 0 5px;
+	margin:10px 0 -3px;
 	overflow:hidden;
 }
 .price-box .price{
@@ -4419,14 +4424,23 @@ div .quantity input.minus:hover{
 	color:#666;
 	font-size:12px;
 	text-transform:uppercase;
-	text-align:right;
+	text-align:left;
 	padding-top:2px;
 }
 .product-essential h2 span{
 	font-weight:bold;
 }
-.product-essential div.product-brand-logo{
-	float:right;
+
+.yashare-auto-init {
+    position:absolute;
+    margin-top:-5px;
+}
+
+.product-essential div.product-brand-logo {
+    float:left;
+}
+
+.product-essential div.product-brand-logo a img{
 	width:113px;
 	height:61px;
 	margin: 0 5px 5px 5px;
@@ -4682,7 +4696,7 @@ a.link-produktinfo:hover{
 	width:245px;
 	position:relative;
 	margin:25px 20px 0 0;
-	padding:10px 0 0;
+	padding:0px 0 0;
 	overflow:hidden;
 }
 .product-view .product-shop{

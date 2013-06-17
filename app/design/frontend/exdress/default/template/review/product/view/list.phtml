@@ -32,6 +32,7 @@
         <!--<h2><?php echo $this->__('Customer Reviews') ?></h2>-->
         <?php echo $this->getChildHtml('toolbar') ?>
         <dl>
+            <h2><?php echo $this->__('Отзывы о товаре '); ?><?php echo $this->getProduct()->getName(); ?></h2>
         <?php foreach ($_items as $_review):?>
 			<div class="group-review">
             <dt>
