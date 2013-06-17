@@ -113,18 +113,16 @@
                     <?php echo $_helper->productAttribute($_product, nl2br($_product->getDescrQuality()), 'description_quality') ?>
                 </div>
                 <?php endif;?>
-
-                <?php if($hasBrand): ?>
-                    <div class="product-brand-logo">
-                        Бренд (производитель):
-                        <a href="<?php echo ($brandURL) ? $brandURL : 'javascript:return false;' ?>">
-                            <img src="<?php echo $hasBrand ?>" alt="<?php echo $brandFileName ?>" />
-                        </a>
-                    </div>
-                <?php elseif ($_product->getBrandLogo() != null && $_product->getBrandLogo() != ''):?>
-                    Бренд (производитель): <?php echo $this->escapeHtml($_product->getBrandLogo());?>
-                    </div>
-                <?php endif;?>
+                    <?php if($hasBrand): ?>
+                        <div class="product-brand-logo">
+                            Бренд (производитель):
+                            <a href="<?php echo ($brandURL) ? $brandURL : 'javascript:return false;' ?>">
+                                <img src="<?php echo $hasBrand ?>" alt="<?php echo $brandFileName ?>" />
+                            </a>
+                        </div>
+                    <?php elseif ($_product->getBrandLogo() != null && $_product->getBrandLogo() != ''):?>
+                        <div class="std">Бренд (производитель): <?php echo $this->escapeHtml($_product->getBrandLogo());?></div>
+                    <?php endif;?>
                 <div class="std">
                     <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('services_product')->toHtml() ?>
                 </div>
