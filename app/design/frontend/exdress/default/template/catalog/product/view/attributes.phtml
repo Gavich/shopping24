@@ -18,8 +18,6 @@
 <?php if($_additional = $this->getAdditionalData()): ?>
     <table class="data-table" id="product-attribute-specs-table">
         <h2><?php echo $this->__('Описание товара ');?><?php echo $this->getProduct()->getName(); ?></h2>
-        <?php /*<col width="25%" />*/?>
-        <col />
         <tbody>
         <?php foreach ($_additional as $_data): ?>
             <?php if ($_data['value'] == 'N/A') continue ?>
