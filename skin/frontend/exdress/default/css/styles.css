@@ -3758,15 +3758,17 @@ tr.summary-details-excluded{
 }
 .catalog-product-view .ratings{
 	margin-top:2px;
-	position:absolute;
-	left:450px;
 	white-space:nowrap;
 	width:195px;
+    float:left;
 }
 
 .review-summary {
-    margin-left:350px;
-    position:absolute;
+
+}
+.rating-wrapper {
+    float:left;
+    width:100%;
 }
 .ratings{
 	line-height:1.25;
@@ -3804,7 +3806,7 @@ tr.summary-details-excluded{
 }
 .rating-box .rating{
 	float:left;
-	height:13px;
+	height:14px;
 	background:url(../images/cdd_rating.gif) 0 100% repeat-x;
 }
 .ratings .rating-box{
@@ -4499,7 +4501,9 @@ div .quantity input.minus:hover{
 	padding:30px;
 }
 .product-view .short-description{
-	padding: 25px;
+    float: left;
+    padding-top: 25px;
+    width: 373px;
 }
 .box-additional table{
 	padding:15px 20px 30px;
