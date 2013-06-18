@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Rganzhuyev_ReviewsSummary>
+            <version>0.1.0</version>
+        </Rganzhuyev_ReviewsSummary>
+    </modules>
+    <global>
+        <helpers>
+            <reviews_summary>
+                <class>Rganzhuyev_ReviewsSummary_Helper</class>
+            </reviews_summary>
+        </helpers>
+        <resources>
+            <dim_attribute_setup>
+                <setup>
+                    <module>Rganzhuyev_ReviewsSummary</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+            </dim_attribute_setup>
+        </resources>
+    </global>
+</config>

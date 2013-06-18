@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Rganzhuyev_ReviewsSummary>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Rganzhuyev_ReviewsSummary>
+    </modules>
+	
+</config>

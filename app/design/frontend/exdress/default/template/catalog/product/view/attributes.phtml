@@ -16,10 +16,8 @@
     $_product = $this->getProduct()
 ?>
 <?php if($_additional = $this->getAdditionalData()): ?>
-    <?php /*<h2><?php echo $this->__('Additional Information') ?></h2> */?>
     <table class="data-table" id="product-attribute-specs-table">
-        <?php /*<col width="25%" />*/?>
-        <col />
+        <h2><?php echo $this->__('Описание товара'); ?> <?php echo $_product->getName(); ?></h2>
         <tbody>
         <?php foreach ($_additional as $_data): ?>
             <?php if ($_data['value'] == 'N/A') continue ?>
