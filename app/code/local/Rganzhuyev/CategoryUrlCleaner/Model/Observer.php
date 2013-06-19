@@ -9,7 +9,7 @@ class Rganzhuyev_CategoryUrlCleaner_Model_Observer extends Mage_Catalog_Model_Ob
         $categoryUrl = explode('-', $path[0]);
         $categoryId = array_shift($categoryUrl);
         $isCategory = @array_shift($categoryUrl) == 'category';
-        $categoryPath = implode($categoryUrl);
+        $categoryPath = implode('-', $categoryUrl);
         $urlPath = Mage::getModel('core/url_rewrite')->loadByIdPath('category/'.$categoryId);
 
         $urlPath = $urlPath->getData('request_path');
