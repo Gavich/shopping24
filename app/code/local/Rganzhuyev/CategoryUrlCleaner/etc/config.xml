@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Rganzhuyev_CategoryUrlCleaner>
+            <version>0.1.0</version>
+        </Rganzhuyev_CategoryUrlCleaner>
+    </modules>
+    <global>
+        <models>
+            <catalog>
+                <rewrite>
+                    <category>Rganzhuyev_CategoryUrlCleaner_Model_Category</category>
+                </rewrite>
+            </catalog>
+        </models>
+        <events>
+            <controller_front_init_before>
+                <observers>
+                    <controller_front_action_before>
+                        <type>singleton</type>
+                        <class>Rganzhuyev_CategoryUrlCleaner_Model_Observer</class>
+                        <method>categoryUrlClean</method>
+                    </controller_front_action_before>
+                </observers>
+            </controller_front_init_before>
+        </events>
+    </global>
+</config>
