@@ -25,4 +25,25 @@
             </controller_front_init_before>
         </events>
     </global>
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <category_url_cleaner>
+                                            <title>Category Url Cleaner</title>
+                                        </category_url_cleaner>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
 </config>
