@@ -92,7 +92,7 @@
                     }
                 ?>
                 <h1>
-                    <?php echo $_helper->productAttribute($_product, $_product->getMetaTitle(), 'meta_title') ?>
+                    <?php echo $this->getChildHtml('meta_title') ?>
                 </h1>
                 <div class="rating-wrapper">
                     <?php echo $this->getReviewsSummaryHtml($_product, false, true) ?>

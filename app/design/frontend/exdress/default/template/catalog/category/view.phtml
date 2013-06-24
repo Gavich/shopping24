@@ -11,7 +11,7 @@
     <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
         <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
     <?php endif; ?>
-    <h1><?php echo $_helper->categoryAttribute($_category, $_category->getMetaTitle(), 'meta_title') ?></h1>
+    <h1><?php echo $this->getChildHtml('meta_title') ?></h1>
     <div class="cls_hide-options">
           <div id="div_hide_option" onclick="clickHideOption()" >
               <?php echo $this->__('Hide') ?>
