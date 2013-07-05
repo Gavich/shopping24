@@ -12,6 +12,11 @@
                     <category>Rganzhuyev_CategoryUrlCleaner_Model_Category</category>
                 </rewrite>
             </catalog>
+            <sitemap_resource>
+                <rewrite>
+                    <catalog_category>Rganzhuyev_CategoryUrlCleaner_Model_SeoUrlRewrite_Category</catalog_category>
+                </rewrite>
+            </sitemap_resource>
         </models>
         <events>
             <controller_front_init_before>
