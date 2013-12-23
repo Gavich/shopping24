@@ -16,3 +16,4 @@ google*.html
 downloader/.cache/*
 sitemap/*
 mysitemap/*
+magicento.phpstorm.meta.php
