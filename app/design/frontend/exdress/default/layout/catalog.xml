@@ -22,6 +22,11 @@
             <block type="catalog/navigation" name="catalog.leftnav" before="-" template="catalog/navigation/left.phtml" />
         </reference>
         <reference name="content">
+					<block type="cms/block" name="vertical_banner">                
+					<action method="setBlockId"><block_id>vertical_banner</block_id></action>
+				</block>
+		     </reference>		
+		<reference name="content">		
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
                 <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
                     <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
@@ -46,6 +51,11 @@
             <!--<block type="catalog/layer_view" name="catalog.leftnav" before="mini_login" template="catalog/layer/view.phtml"/>-->
             <block type="customer/form_login" name="mini_login" before="catalog.compare.sidebar" template="customer/form/mini.login.phtml" />
         </reference>
+		<reference name="content">
+					<block type="cms/block" name="vertical_banner">                
+					<action method="setBlockId"><block_id>vertical_banner</block_id></action>
+				</block>
+		     </reference>
         <reference name="content">
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
                 <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
