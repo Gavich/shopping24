@@ -17,10 +17,9 @@
 <script type="text/javascript">
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
-<script type="text/javascript">   
-    var $j = jQuery.noConflict();
-    $j(document).ready(function(){
-        $j('#tabs').tabs({ fx: { opacity: 'toggle', duration:'normal'} });
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('#tabs').tabs();
     });
 </script>
 <div class="product-view">
@@ -92,7 +91,7 @@
                     }
                 ?>
                 <h1>
-                    <?php echo $_helper->productAttribute($_product, $_product->getMetaTitle(), 'meta_title') ?>
+                    <?php echo $this->getChildHtml('meta_title') ?>
                 </h1>
                 <div class="rating-wrapper">
                     <?php echo $this->getReviewsSummaryHtml($_product, false, true) ?>
@@ -170,7 +169,6 @@
     </script>
 </div>
 
-<!-- starts jquery tabs -->  
 <div id="tabs" class="product-collateral">
     <ul>
         <?php if ($_description = $this->getChildHtml('description')):?>
@@ -187,7 +185,6 @@
 
         <li><a href="#tab-box-reviews"><span><?php echo $this->__('Customer Reviews') ?></span></a></li>
         <li><a href="#tab-box-tags"><span><?php echo $this->__('Product Tags') ?></span></a></li>
-        <?php /*<li><a href="#tab-box-delivery"><span><?php echo $this->__('Delivery & Returns') ?></span></a></li>*/ ?>
     </ul>
 
     <?php if ($_description):?>
@@ -198,7 +195,7 @@
 
     <?php if ($_additional):?>
     <div id="tab-box-additional" class="box-collateral box-additional">
-        <?php echo $_additional ?>
+        <div class="layout-seo-fixer"></div>
     </div>
     <?php endif;?>
 
@@ -208,19 +205,15 @@
     <div id="tab-box-tags" class="box-collateral">
         <?php echo $this->getChildHtml('product_additional_data') ?>
     </div>
-    <?php /*div id="tab-box-delivery" class="box-collateral">
-        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('delivery_returns')->toHtml() ?>
-    </div */ ?>
+
     <?php if($_product->getDescrBrandtext()): ?>
     <div id="tab-box-brand" class="box-collateral">
-        <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('delivery_returns')->toHtml() ?>
         <div class="std">
             <?php echo $_helper->productAttribute($_product, nl2br($_product->getDescrBrandtext()), 'description_brand') ?>
         </div>
     </div>
     <?php endif ?>
 </div>
-<!-- end jquery tabs-->
 
 <div class="product-view-group">
     <?php echo $this->getChildHtml('catalog.product.related');?>

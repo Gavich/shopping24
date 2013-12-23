@@ -13,10 +13,21 @@
         </reference>
 
         <block type="catalog/product_price_template" name="catalog_product_price_template" />
+        <reference name="root">
+            <block type="core/text_list" name="page_start" translate="label">
+                <label>Page Start</label>
+                <block type="core/template" template="page/html/ping.phtml" />
+            </block>
+        </reference>
     </default>
 
     <catalog_category_default translate="label">
         <update handle="page_two_columns_left" />
+
+        <reference name="page_start">
+            <block name="category.seo.description" type="core/template"
+                   template="catalog/category/category_description.phtml"/>
+        </reference>
 
         <reference name="left">
             <block type="catalog/navigation" name="catalog.leftnav" before="-" template="catalog/navigation/left.phtml" />
@@ -46,9 +57,13 @@
     <catalog_category_layered translate="label">
         <update handle="page_two_columns_left" />
 
+        <reference name="page_start">
+            <block name="category.seo.description" type="core/template"
+                   template="catalog/category/category_description.phtml"/>
+        </reference>
+
         <reference name="left" >
             <block type="catalog/navigation" name="catalog.leftnav.subcategories" before="-" template="catalog/navigation/left.phtml"/>
-            <!--<block type="catalog/layer_view" name="catalog.leftnav" before="mini_login" template="catalog/layer/view.phtml"/>-->
             <block type="customer/form_login" name="mini_login" before="catalog.compare.sidebar" template="customer/form/mini.login.phtml" />
         </reference>
 		<reference name="content">
@@ -73,10 +88,6 @@
             </block>
         </reference>
     </catalog_category_layered>
-
-    <catalog_category_layered_nochildren translate="label">
-
-    </catalog_category_layered_nochildren>
 
     <catalog_product_compare_index translate="label">
         <label>Catalog Product Compare List</label>
@@ -109,6 +120,12 @@ Product view
         <reference name="root">
             <action method="setTemplate"><template>page/1column.phtml</template></action>
         </reference>
+
+        <reference name="page_start">
+            <block name="product.seo.description" type="core/template"
+                   template="catalog/product/view/product_additional_description.phtml"/>
+        </reference>
+
         <reference name="head">
             <action method="addJs"><script>varien/product.js</script></action>
             <action method="addJs"><script>varien/configurable.js</script></action>
