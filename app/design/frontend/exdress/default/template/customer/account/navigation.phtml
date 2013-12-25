@@ -23,6 +23,7 @@
  * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+// @TODO FIXME
 ?>
 <div class="block block-account">
     <div class="block-title">
@@ -30,14 +31,14 @@
     </div>
     <div class="block-content">
         <ul>
-            <?php $_links = $this->getLinks(); ?> 
-            <?php $_links2 = array();?>              
-            <?php    
-               foreach ($_links as $_link) {            	
+            <?php $_links = $this->getLinks(); ?>
+            <?php $_links2 = array();?>
+            <?php
+               foreach ($_links as $_link) {
             	if ($_link['name']=='account') $_links2[0] = $_link;
             	if ($_link['name']=='orders') $_links2[1] = $_link;
             	if ($_link['name']=='account_edit') $_links2[2] = $_link;
-            	if ($_link['name']=='address_book') $_links2[13] = $_link;            	
+            	if ($_link['name']=='address_book') $_links2[13] = $_link;
             	if ($_link['name']=='billing_agreements') $_links2[4] = $_link;
             	//if ($_link['name']=='recurring_profiles') $_links2[5] = $_link;
             	if ($_link['name']=='reviews') $_links2[6] = $_link;
@@ -47,8 +48,8 @@
             	if ($_link['name']=='newsletter') $_links2[4] = $_link;
             	if ($_link['name']=='downloadable_products') $_links2[11] = $_link;
             	//if ($_link['name']=='OAuth Customer Tokens') $_links2[8] = $_link;
-            }   
-            ?>                  
+            }
+            ?>
             <?php $_index = 1; ?>
             <?php $_count = count($_links2); ?>
             <?php // foreach ($_links as $_link): ?>
