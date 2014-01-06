@@ -16,3 +16,8 @@ google*.html
 downloader/.cache/*
 sitemap/*
 mysitemap/*
+magicento.phpstorm.meta.php
+parser/
+parser_otto/
+shopping24/
+storage2/

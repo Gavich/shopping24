@@ -13,15 +13,32 @@
         </reference>
 
         <block type="catalog/product_price_template" name="catalog_product_price_template" />
+        <reference name="root">
+            <block type="core/text_list" name="page_start" translate="label">
+                <label>Page Start</label>
+                <block type="core/template" template="page/html/ping.phtml" />
+            </block>
+        </reference>
     </default>
 
     <catalog_category_default translate="label">
         <update handle="page_two_columns_left" />
 
+        <reference name="page_start">
+            <block name="category.seo.description" type="core/template"
+                   template="catalog/category/category_description.phtml"/>
+        </reference>
+
         <reference name="left">
-            <block type="catalog/navigation" name="catalog.leftnav" before="-" template="catalog/navigation/left.phtml" />
+            <block type="catalog/navigation" name="catalog.leftnav" before="-"
+                   template="catalog/navigation/left.phtml"/>
         </reference>
         <reference name="content">
+            <block type="cms/block" name="vertical_banner">
+                <action method="setBlockId">
+                    <block_id>vertical_banner</block_id>
+                </action>
+            </block>
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
                 <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
                     <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
@@ -41,12 +58,19 @@
     <catalog_category_layered translate="label">
         <update handle="page_two_columns_left" />
 
+        <reference name="page_start">
+            <block name="category.seo.description" type="core/template"
+                   template="catalog/category/category_description.phtml"/>
+        </reference>
+
         <reference name="left" >
             <block type="catalog/navigation" name="catalog.leftnav.subcategories" before="-" template="catalog/navigation/left.phtml"/>
-            <!--<block type="catalog/layer_view" name="catalog.leftnav" before="mini_login" template="catalog/layer/view.phtml"/>-->
             <block type="customer/form_login" name="mini_login" before="catalog.compare.sidebar" template="customer/form/mini.login.phtml" />
         </reference>
         <reference name="content">
+            <block type="cms/block" name="vertical_banner">
+                <action method="setBlockId"><block_id>vertical_banner</block_id></action>
+            </block>
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
                 <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
                     <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary_short.phtml</template></action>
@@ -63,10 +87,6 @@
             </block>
         </reference>
     </catalog_category_layered>
-
-    <catalog_category_layered_nochildren translate="label">
-
-    </catalog_category_layered_nochildren>
 
     <catalog_product_compare_index translate="label">
         <label>Catalog Product Compare List</label>
@@ -99,6 +119,12 @@ Product view
         <reference name="root">
             <action method="setTemplate"><template>page/1column.phtml</template></action>
         </reference>
+
+        <reference name="page_start">
+            <block name="product.seo.description" type="core/template"
+                   template="catalog/product/view/product_additional_description.phtml"/>
+        </reference>
+
         <reference name="head">
             <action method="addJs"><script>varien/product.js</script></action>
             <action method="addJs"><script>varien/configurable.js</script></action>
@@ -114,7 +140,7 @@ Product view
                 <action method="addReviewSummaryTemplate"><type>short</type><template>review/helper/summary_short.phtml</template></action>
                 <action method="addReviewSummaryTemplate"><type>...</type><template>...</template></action>
                 -->
-				<block type="core/template" name="product_review_list.count" template="review/product/view/count.phtml" />
+                <block type="core/template" name="product_review_list.count" template="review/product/view/count.phtml" />
 
                 <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
                 <block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
@@ -136,7 +162,7 @@ Product view
                     <action method="setColumnCount"><columns>3</columns></action>
                     <action method="setItemLimit"><type>upsell</type><limit>6</limit></action>
                 </block>
-				<block type="review/product_view_list" name="product.info.product_additional_data" as="product_additional_data_review" template="review/product/view/list.phtml" >
+                <block type="review/product_view_list" name="product.info.product_additional_data" as="product_additional_data_review" template="review/product/view/list.phtml" >
                     <block type="review/form" name="product.review.form" as="review_form">
                         <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
                             <label>Review Form Fields Before</label>
