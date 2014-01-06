@@ -201,7 +201,6 @@ class Itdelight_Metadata_Model_Observer {
         $product=$event->getProduct();
         $customModel=Mage::getModel('metadata/metadata');
         $customCollection=$customModel->getCollection();
-        $page=Mage::getSingleton('core/session')->getPage($page);
         foreach ($customCollection as $custom)
         {        
             $this->generateForProductsOfCat($product,$custom);
