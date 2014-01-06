@@ -138,10 +138,7 @@ Default layout, loads most of the pages
 				<block type="cms/block" name="cms_infocenter">                
 					<action method="setBlockId"><block_id>infocenter</block_id></action>
 				</block>
-				<block type="cms/block" name="footerlinks">                
-					<action method="setBlockId"><block_id>footer_links</block_id></action>
-				</block>
-                <block type="cms/block" name="legal_notices">                
+                <block type="cms/block" name="legal_notices">
 					<action method="setBlockId"><block_id>legal_notices</block_id></action>
 				</block>
 				<block type="cms/block" name="cms_storelocation">                
