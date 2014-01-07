@@ -51,7 +51,7 @@ class MageWorx_SeoSuite_Controller_Router extends Mage_Core_Controller_Varien_Ro
 
         $identifier = trim($request->getPathInfo(), '/');
 
-        $d = explode('/', $identifier);
+        $d = split('/', $identifier);
 
         if (count($d) < 2) {
             return false;
