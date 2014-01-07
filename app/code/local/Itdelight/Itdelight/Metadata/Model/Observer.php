@@ -1,7 +1,11 @@
 <?php
 
 class Itdelight_Metadata_Model_Observer {
-
+    
+    public function _construct()
+    {     
+    }
+    
     public function getCategory1($model){
         $string=$model->getCategoryIds();
         $arr=explode(',',$string);
@@ -9,6 +13,7 @@ class Itdelight_Metadata_Model_Observer {
         return $var;
     }
     public function patternCatalogFunction($text_field,$category){
+         
         $categories=$category->getParentIds();
         $parent=$category->getParentId();
         $i=0;
@@ -143,13 +148,16 @@ class Itdelight_Metadata_Model_Observer {
     public function generateNewMetadata($product,$custom){
          $page=Mage::getSingleton('core/session')->getPage($page);
         $array=explode("<e>",$custom);
+        Mage::Log($array,null,'uu.log');
+  //      $count=substr_count($custom,"<e>");
         $count=count($array);
         if(($page>$count)&($count>0)){
             $new_index=$page % $count;
             $new_data=$array[$new_index];
         }else{
             $new_data=$product.' '.$array[--$page];
-
+       Mage::Log($new_data,null,'new_data.log');
+            
         }
 
         return $new_data;

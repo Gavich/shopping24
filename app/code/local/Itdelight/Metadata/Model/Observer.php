@@ -1,6 +1,11 @@
 <?php
 
 class Itdelight_Metadata_Model_Observer {
+    
+    public function _construct()
+    {     
+    }
+    
     public function getCategory1($model){
         $string=$model->getCategoryIds();
         $arr=explode(',',$string);
