@@ -52,6 +52,7 @@
                     <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
                 </block>
             </block>
+            <block type="tccatalog/robots" name="catalog.robots" />
         </reference>
     </catalog_category_default>
 
@@ -86,6 +87,7 @@
                 </block>
             </block>
         </reference>
+        <block type="tccatalog/robots" name="catalog.robots" />
     </catalog_category_layered>
 
     <catalog_product_compare_index translate="label">
@@ -134,6 +136,7 @@ Product view
             <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
         </reference>
         <reference name="content">
+            <block type="tccatalog/robots" name="catalog.robots" />
             <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
                 <!--
                 <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
