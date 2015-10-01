@@ -9,6 +9,8 @@
 nbproject/
 
 # Magento
+PATCH_SUPEE-6482_CE_1.8.0.0_v1-2015-08-03-06-52-35.sh
+PATCH_SUPEE-6285_CE_1.7.0.2_v1-2015-07-07-09-09-08.sh
 app/etc/local.xml
 media/*
 var/*
