@@ -24,16 +24,27 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-
+/**
+ * Class Onepage controller
+ */
 class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
 {
+    /**
+     * Functions for concrete method
+     *
+     * @var array
+     */
     protected $_sectionUpdateFunctions = array(
         'payment-method'  => '_getPaymentMethodsHtml',
         'shipping-method' => '_getShippingMethodsHtml',
         'review'          => '_getReviewHtml',
     );
 
-    /** @var Mage_Sales_Model_Order */
+    /**
+     * Order instance
+     *
+     * @var Mage_Sales_Model_Order
+     */
     protected $_order;
 
     /**
@@ -50,7 +61,7 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
             $checkoutSessionQuote->removeAllAddresses();
         }
 
-        if(!$this->_canShowForUnregisteredUsers()){
+        if (!$this->_canShowForUnregisteredUsers()) {
             $this->norouteAction();
             $this->setFlag('',self::FLAG_NO_DISPATCH,true);
             return;
@@ -59,6 +70,11 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
         return $this;
     }
 
+    /**
+     * Send headers in case if session is expired
+     *
+     * @return Mage_Checkout_OnepageController
+     */
     protected function _ajaxRedirectResponse()
     {
         $this->getResponse()
@@ -123,6 +139,12 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
         return $output;
     }
 
+    /**
+     * Return block content from the 'checkout_onepage_additional'
+     * This is the additional content for shipping method
+     *
+     * @return string
+     */
     protected function _getAdditionalHtml()
     {
         $layout = $this->getLayout();
@@ -180,7 +202,7 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
             return;
         }
         Mage::getSingleton('checkout/session')->setCartWasUpdated(false);
-        Mage::getSingleton('customer/session')->setBeforeAuthUrl(Mage::getUrl('*/*/*', array('_secure'=>true)));
+        Mage::getSingleton('customer/session')->setBeforeAuthUrl(Mage::getUrl('*/*/*', array('_secure' => true)));
         $this->getOnepage()->initCheckout();
         $this->loadLayout();
         $this->_initLayoutMessages('customer/session');
@@ -200,6 +222,9 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
         $this->renderLayout();
     }
 
+    /**
+     * Shipping action
+     */
     public function shippingMethodAction()
     {
         if ($this->_expireAjax()) {
@@ -209,6 +234,9 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
         $this->renderLayout();
     }
 
+    /**
+     * Review action
+     */
     public function reviewAction()
     {
         if ($this->_expireAjax()) {
@@ -244,6 +272,9 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
         $this->renderLayout();
     }
 
+    /**
+     * Failure action
+     */
     public function failureAction()
     {
         $lastQuoteId = $this->getOnepage()->getCheckout()->getLastQuoteId();
@@ -259,6 +290,9 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
     }
 
 
+    /**
+     * Additional action
+     */
     public function getAdditionalAction()
     {
         $this->getResponse()->setBody($this->_getAdditionalHtml());
@@ -383,10 +417,10 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
             /*
             $result will have erro data if shipping method is empty
             */
-            if(!$result) {
+            if (!$result) {
                 Mage::dispatchEvent('checkout_controller_onepage_save_shipping_method',
-                        array('request'=>$this->getRequest(),
-                            'quote'=>$this->getOnepage()->getQuote()));
+                    array('request' => $this->getRequest(),
+                        'quote' => $this->getOnepage()->getQuote()));
                 $this->getOnepage()->getQuote()->collectTotals();
                 $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
 
@@ -452,7 +486,8 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
     /**
      * Get Order by quoteId
      *
-     * @return Mage_Sales_Model_Order
+     * @return Mage_Core_Model_Abstract|Mage_Sales_Model_Order
+     * @throws Mage_Payment_Model_Info_Exception
      */
     protected function _getOrder()
     {
@@ -489,15 +524,21 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
      */
     public function saveOrderAction()
     {
+        if (!$this->_validateFormKey()) {
+            return $this->_redirect('*/*');
+        }
+
         if ($this->_expireAjax()) {
             return;
         }
 
         $result = array();
         try {
-            if ($requiredAgreements = Mage::helper('checkout')->getRequiredAgreementIds()) {
+            $requiredAgreements = Mage::helper('checkout')->getRequiredAgreementIds();
+            if ($requiredAgreements) {
                 $postedAgreements = array_keys($this->getRequest()->getPost('agreement', array()));
-                if ($diff = array_diff($requiredAgreements, $postedAgreements)) {
+                $diff = array_diff($requiredAgreements, $postedAgreements);
+                if ($diff) {
                     $result['success'] = false;
                     $result['error'] = true;
                     $result['error_messages'] = $this->__('Please agree to all the terms and conditions before placing the order.');
@@ -515,7 +556,7 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
             $result['error']   = false;
         } catch (Mage_Payment_Model_Info_Exception $e) {
             $message = $e->getMessage();
-            if( !empty($message) ) {
+            if ( !empty($message) ) {
                 $result['error_messages'] = $message;
             }
             $result['goto_section'] = 'payment';
@@ -530,12 +571,13 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
             $result['error'] = true;
             $result['error_messages'] = $e->getMessage();
 
-            if ($gotoSection = $this->getOnepage()->getCheckout()->getGotoSection()) {
+            $gotoSection = $this->getOnepage()->getCheckout()->getGotoSection();
+            if ($gotoSection) {
                 $result['goto_section'] = $gotoSection;
                 $this->getOnepage()->getCheckout()->setGotoSection(null);
             }
-
-            if ($updateSection = $this->getOnepage()->getCheckout()->getUpdateSection()) {
+            $updateSection = $this->getOnepage()->getCheckout()->getUpdateSection();
+            if ($updateSection) {
                 if (isset($this->_sectionUpdateFunctions[$updateSection])) {
                     $updateSectionFunction = $this->_sectionUpdateFunctions[$updateSection];
                     $result['update_section'] = array(

@@ -367,6 +367,11 @@ final class Maged_Controller
      */
     public function connectInstallPackageUploadAction()
     {
+        if (!$this->_validateFormKey()) {
+            echo "No file was uploaded";
+            return;
+        }
+
         if (!$_FILES) {
             echo "No file was uploaded";
             return;
@@ -1089,5 +1094,28 @@ final class Maged_Controller
         }
 
         return $messagesMap[$type];
+    }
+
+    /**
+     * Validate Form Key
+     *
+     * @return bool
+     */
+    protected function _validateFormKey()
+    {
+        if (!($formKey = $_REQUEST['form_key']) || $formKey != $this->session()->getFormKey()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Retrieve Session Form Key
+     *
+     * @return string
+     */
+    public function getFormKey()
+    {
+        return $this->session()->getFormKey();
     }
 }

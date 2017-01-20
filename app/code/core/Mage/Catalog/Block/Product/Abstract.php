@@ -34,6 +34,11 @@
  */
 abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Template
 {
+    /**
+     * Price block array
+     *
+     * @var array
+     */
     protected $_priceBlock = array();
 
     /**
@@ -43,10 +48,25 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
      */
     protected $_block = 'catalog/product_price';
 
+    /**
+     * Price template
+     *
+     * @var string
+     */
     protected $_priceBlockDefaultTemplate = 'catalog/product/price.phtml';
 
+    /**
+     * Tier price template
+     *
+     * @var string
+     */
     protected $_tierPriceDefaultTemplate  = 'catalog/product/view/tierprices.phtml';
 
+    /**
+     * Price types
+     *
+     * @var array
+     */
     protected $_priceBlockTypes = array();
 
     /**
@@ -56,6 +76,11 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
      */
     protected $_useLinkForAsLowAs = true;
 
+    /**
+     * Review block instance
+     *
+     * @var null|Mage_Review_Block_Helper
+     */
     protected $_reviewsHelperBlock;
 
     /**
@@ -89,18 +114,33 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
      */
     public function getAddToCartUrl($product, $additional = array())
     {
-        if ($product->getTypeInstance(true)->hasRequiredOptions($product)) {
-            if (!isset($additional['_escape'])) {
-                $additional['_escape'] = true;
-            }
-            if (!isset($additional['_query'])) {
-                $additional['_query'] = array();
-            }
-            $additional['_query']['options'] = 'cart';
-
-            return $this->getProductUrl($product, $additional);
+        if (!$product->getTypeInstance(true)->hasRequiredOptions($product)) {
+            return $this->helper('checkout/cart')->getAddUrl($product, $additional);
         }
-        return $this->helper('checkout/cart')->getAddUrl($product, $additional);
+        $additional = array_merge(
+            $additional,
+            array(Mage_Core_Model_Url::FORM_KEY => $this->_getSingletonModel('core/session')->getFormKey())
+        );
+        if (!isset($additional['_escape'])) {
+            $additional['_escape'] = true;
+        }
+        if (!isset($additional['_query'])) {
+            $additional['_query'] = array();
+        }
+        $additional['_query']['options'] = 'cart';
+        return $this->getProductUrl($product, $additional);
+    }
+
+    /**
+     * Return model instance
+     *
+     * @param string $className
+     * @param array $arguments
+     * @return Mage_Core_Model_Abstract
+     */
+    protected function _getSingletonModel($className, $arguments = array())
+    {
+        return Mage::getSingleton($className, $arguments);
     }
 
     /**
@@ -126,7 +166,7 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
     }
 
     /**
-     * Enter description here...
+     * Return link to Add to Wishlist
      *
      * @param Mage_Catalog_Model_Product $product
      * @return string
@@ -155,6 +195,12 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
         return null;
     }
 
+    /**
+     * Return price block
+     *
+     * @param string $productTypeId
+     * @return mixed
+     */
     protected function _getPriceBlock($productTypeId)
     {
         if (!isset($this->_priceBlock[$productTypeId])) {
@@ -169,6 +215,12 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
         return $this->_priceBlock[$productTypeId];
     }
 
+    /**
+     * Return Block template
+     *
+     * @param string $productTypeId
+     * @return string
+     */
     protected function _getPriceBlockTemplate($productTypeId)
     {
         if (isset($this->_priceBlockTypes[$productTypeId])) {
@@ -304,6 +356,11 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
         return $this->getData('product');
     }
 
+    /**
+     * Return tier price template
+     *
+     * @return mixed|string
+     */
     public function getTierPriceTemplate()
     {
         if (!$this->hasData('tier_price_template')) {
@@ -419,13 +476,13 @@ abstract class Mage_Catalog_Block_Product_Abstract extends Mage_Core_Block_Templ
      *
      * @return string
      */
-    public function getImageLabel($product=null, $mediaAttributeCode='image')
+    public function getImageLabel($product = null, $mediaAttributeCode = 'image')
     {
         if (is_null($product)) {
             $product = $this->getProduct();
         }
 
-        $label = $product->getData($mediaAttributeCode.'_label');
+        $label = $product->getData($mediaAttributeCode . '_label');
         if (empty($label)) {
             $label = $product->getName();
         }

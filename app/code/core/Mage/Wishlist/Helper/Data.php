@@ -135,11 +135,9 @@ class Mage_Wishlist_Helper_Data extends Mage_Core_Helper_Abstract
         if (is_null($this->_wishlist)) {
             if (Mage::registry('shared_wishlist')) {
                 $this->_wishlist = Mage::registry('shared_wishlist');
-            }
-            elseif (Mage::registry('wishlist')) {
+            } else if (Mage::registry('wishlist')) {
                 $this->_wishlist = Mage::registry('wishlist');
-            }
-            else {
+            } else {
                 $this->_wishlist = Mage::getModel('wishlist/wishlist');
                 if ($this->getCustomer()) {
                     $this->_wishlist->loadByCustomer($this->getCustomer());
@@ -260,8 +258,7 @@ class Mage_Wishlist_Helper_Data extends Mage_Core_Helper_Abstract
         if ($product) {
             if ($product->isVisibleInSiteVisibility()) {
                 $storeId = $product->getStoreId();
-            }
-            else if ($product->hasUrlDataObject()) {
+            } else if ($product->hasUrlDataObject()) {
                 $storeId = $product->getUrlDataObject()->getStoreId();
             }
         }
@@ -277,7 +274,10 @@ class Mage_Wishlist_Helper_Data extends Mage_Core_Helper_Abstract
     public function getRemoveUrl($item)
     {
         return $this->_getUrl('wishlist/index/remove',
-            array('item' => $item->getWishlistItemId())
+            array(
+                'item' => $item->getWishlistItemId(),
+                Mage_Core_Model_Url::FORM_KEY => $this->_getSingletonModel('core/session')->getFormKey()
+            )
         );
     }
 
@@ -360,37 +360,59 @@ class Mage_Wishlist_Helper_Data extends Mage_Core_Helper_Abstract
             $productId = $item->getProductId();
         }
 
-        if ($productId) {
-            $params['product'] = $productId;
-            return $this->_getUrlStore($item)->getUrl('wishlist/index/add', $params);
+        if (!$productId) {
+            return false;
         }
-
-        return false;
+        $params['product'] = $productId;
+        $params[Mage_Core_Model_Url::FORM_KEY] = $this->_getSingletonModel('core/session')->getFormKey();
+        return $this->_getUrlStore($item)->getUrl('wishlist/index/add', $params);
     }
 
     /**
-     * Retrieve URL for adding item to shoping cart
+     * Retrieve URL for adding item to shopping cart
      *
      * @param string|Mage_Catalog_Model_Product|Mage_Wishlist_Model_Item $item
      * @return  string
      */
     public function getAddToCartUrl($item)
     {
-        $urlParamName = Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED;
-        $continueUrl  = Mage::helper('core')->urlEncode(
-            Mage::getUrl('*/*/*', array(
+        $continueUrl  = $this->_getHelperInstance('core')->urlEncode(
+            $this->_getUrl('*/*/*', array(
                 '_current'      => true,
                 '_use_rewrite'  => true,
                 '_store_to_url' => true,
             ))
         );
-
-        $urlParamName = Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED;
         $params = array(
             'item' => is_string($item) ? $item : $item->getWishlistItemId(),
-            $urlParamName => $continueUrl
+            Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED => $continueUrl,
+            Mage_Core_Model_Url::FORM_KEY => $this->_getSingletonModel('core/session')->getFormKey()
         );
+
         return $this->_getUrlStore($item)->getUrl('wishlist/index/cart', $params);
+    }
+
+    /**
+     * Return helper instance
+     *
+     * @param string $helperName
+     * @return Mage_Core_Helper_Abstract
+     */
+    protected function _getHelperInstance($helperName)
+    {
+        return Mage::helper($helperName);
+    }
+
+    /**
+     * Return model instance
+     *
+     * @param string $className
+     * @param array $arguments
+     * @return Mage_Core_Model_Abstract
+     */
+    protected function _getSingletonModel($className, $arguments = array())
+    {
+        return Mage::getSingleton($className, $arguments);
     }
 
     /**
@@ -407,10 +429,10 @@ class Mage_Wishlist_Helper_Data extends Mage_Core_Helper_Abstract
             '_store_to_url' => true,
         )));
 
-        $urlParamName = Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED;
         $params = array(
             'item' => is_string($item) ? $item : $item->getWishlistItemId(),
-            $urlParamName => $continueUrl
+            Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED => $continueUrl,
+            Mage_Core_Model_Url::FORM_KEY => $this->_getSingletonModel('core/session')->getFormKey()
         );
         return $this->_getUrlStore($item)->getUrl('wishlist/shared/cart', $params);
     }
